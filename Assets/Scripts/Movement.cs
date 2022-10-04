@@ -32,6 +32,7 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
         _body = GetComponent<Rigidbody2D>();
     }
 
@@ -49,6 +50,7 @@ public class Movement : MonoBehaviour
 
     private void SetMotion(float x, float y)
     {
+        
         _deltaX = x * _speed * Time.deltaTime;
         _deltaY = y * _speed * Time.deltaTime;
     }
