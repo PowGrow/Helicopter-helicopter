@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -15,7 +12,7 @@ public class Movement : MonoBehaviour
     private void Move()
     {
         Vector2 movement = new Vector2(_deltaX, _deltaY);
-        _body.velocity = movement;
+        _body.velocity = Vector2.ClampMagnitude(movement * _speed, 5f);
     }
 
     private void Update()
@@ -50,9 +47,8 @@ public class Movement : MonoBehaviour
 
     private void SetMotion(float x, float y)
     {
-        
-        _deltaX = x * _speed * Time.deltaTime;
-        _deltaY = y * _speed * Time.deltaTime;
+        _deltaX = x * Time.deltaTime;
+        _deltaY = y * Time.deltaTime;
     }
 
     private void StopMotion()

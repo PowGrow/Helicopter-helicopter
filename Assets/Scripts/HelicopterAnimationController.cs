@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class VentAnimationController : MonoBehaviour
+public class HelicopterAnimationController : MonoBehaviour
 {
     private Animator _ventAnimator;
     private Rigidbody2D _helicopterRigidbody2d;
