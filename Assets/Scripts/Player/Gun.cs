@@ -7,5 +7,5 @@ public class Gun : ScriptableObject
 {
     public float shootingInterval;
     public GunType gunType;
-    public GameObject bulletPrefab;
+    public GameObject projectilePrefab;
 }

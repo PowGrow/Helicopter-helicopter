@@ -23,7 +23,7 @@ public class Guns : MonoBehaviour, IShooter
         {
             if (_timer > _guns[startGunIndex].shootingInterval)
             {
-                var _bullet = Instantiate(_guns[startGunIndex].bulletPrefab) as GameObject;
+                var _bullet = Instantiate(_guns[startGunIndex].projectilePrefab) as GameObject;
                 _bullet.transform.position = _gunMountPoints[startGunIndex].position;
                 _bullet.transform.rotation = _gunMountPoints[startGunIndex].rotation;
             }
