@@ -1,14 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
+    private IShooter _shooter;
     private PlayerControls _playerControls;
     private bool _isShooting = false;
-    [SerializeField]
-    private GameObject _bulletPrefab;
-    private GameObject _bullet;
 
     private void Shoot()
     {
@@ -20,20 +17,16 @@ public class Shooting : MonoBehaviour
         _isShooting = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if(_isShooting)
-        {
-            _bullet = Instantiate(_bulletPrefab) as GameObject;
-            _bullet.transform.position = transform.TransformPoint(Vector2.up);
-            _bullet.transform.rotation = transform.rotation;
-        }
-            
+        if (_isShooting)
+            _shooter.Fire();
     }
 
     private void Awake()
     {
         _playerControls = new PlayerControls();
+        _shooter = GetComponent<IShooter>();
     }
 
     private void OnEnable()

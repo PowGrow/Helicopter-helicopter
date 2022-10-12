@@ -15,12 +15,6 @@ public class DroidEnemy : MonoBehaviour, IEnemy
             Die();
     }
 
-    private void Awake()
-    {
-        Health = 100;
-        _sprite = GetComponent<SpriteRenderer>();
-    }
-
     private void Die()
     {
         Destroy(this.gameObject);
@@ -33,4 +27,9 @@ public class DroidEnemy : MonoBehaviour, IEnemy
         _sprite.color = Color.white;
     }
 
+    private void Awake()
+    {
+        Health = 100;
+        _sprite = GetComponent<SpriteRenderer>();
+    }
 }

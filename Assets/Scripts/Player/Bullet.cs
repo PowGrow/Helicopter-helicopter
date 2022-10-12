@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private float _bulletLifetime = 1f;
     private float _speed = 10f;
     private float _damage = 10f;
 
@@ -16,7 +17,7 @@ public class Bullet : MonoBehaviour
             enemy.GetDamage(_damage);
         }
 
-        Destroy();
+        Destroy(this.gameObject);
     }
 
     private void Awake()
@@ -31,7 +32,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(_bulletLifetime);
         Destroy(this.gameObject);
     }
 }
