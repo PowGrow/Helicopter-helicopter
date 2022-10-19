@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b59ea304bd7732409de32b414bf1e5a, type: 3}
-  m_Name: Missile
+  m_Name: AutoAimMissle
   m_EditorClassIdentifier: 
   shootingInterval: 0.5
-  gunType: 0
-  projectilePrefab: {fileID: 4642463222394750830, guid: ab1fea66007a860459177467c7529cb5, type: 3}
+  gunType: 1
+  projectilePrefab: {fileID: 0}

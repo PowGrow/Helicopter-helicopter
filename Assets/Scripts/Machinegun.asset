@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b59ea304bd7732409de32b414bf1e5a, type: 3}
   m_Name: Machinegun
   m_EditorClassIdentifier: 
-  shootingInterval: 0
+  shootingInterval: 0.15
   gunType: 0
-  bulletPrefab: {fileID: 0}
+  projectilePrefab: {fileID: 5927899080415761015, guid: 47027b7c46d1aef4fb5c5eaf443e120f, type: 3}
