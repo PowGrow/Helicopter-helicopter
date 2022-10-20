@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootingInterval: 0.5
   gunType: 1
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 4642463222394750830, guid: aacdad546fa01bf41a93ad04e69dc3cc, type: 3}

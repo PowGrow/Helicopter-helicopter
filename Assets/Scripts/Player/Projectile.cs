@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile: MonoBehaviour, IProjectile
 {
     [SerializeField] private float _bulletLifetime = 1f;
-    [SerializeField] private float _speed = 10f;
+    [SerializeField] protected float speed = 10f;
     [SerializeField] private float _damage = 10f;
     private float _damageModificator = 1f;
     private float _speedModificator = 1f;
@@ -36,18 +36,13 @@ public class Projectile: MonoBehaviour, IProjectile
             IEnemy enemy = collision.transform.GetComponent<IEnemy>();
             enemy.GetDamage(_damage * _damageModificator);
         }
-
-        Destroy(this.gameObject);
+        if(collision.gameObject.tag != "Missile")
+            Destroy(this.gameObject);
     }
 
     private void Awake()
     {
         StartCoroutine(Destroy());
-    }
-
-    private void Update()
-    {
-        transform.Translate(0, _speed * Time.deltaTime, 0);
     }
 
     private IEnumerator Destroy()
