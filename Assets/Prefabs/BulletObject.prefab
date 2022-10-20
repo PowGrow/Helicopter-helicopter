@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9010655374395738601}
   m_Layer: 0
   m_Name: BulletObject
-  m_TagString: MIssile
+  m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca77ad2f4c27684388d5fbfad99d613, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletLifetime: 1
+  bulletLifetime: 1
   speed: 10
-  _damage: 10
+  damage: 4
 --- !u!61 &6861903531062280694
 BoxCollider2D:
   m_ObjectHideFlags: 0

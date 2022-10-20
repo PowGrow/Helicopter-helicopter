@@ -4,40 +4,29 @@ using UnityEngine;
 
 public class Projectile: MonoBehaviour, IProjectile
 {
-    [SerializeField] private float _bulletLifetime = 1f;
+    [SerializeField] protected float bulletLifetime = 1f;
     [SerializeField] protected float speed = 10f;
-    [SerializeField] private float _damage = 10f;
-    private float _damageModificator = 1f;
-    private float _speedModificator = 1f;
-    private float _lifetimeModificator = 1f;
+    [SerializeField] protected float damage = 10f;
+    protected float damageModificator = 1f;
+    protected float speedModificator = 1f;
+    protected float lifetimeModificator = 1f;
 
     public virtual float DamageModificator
     {
-        get { return _damageModificator; }
-        set { _damageModificator = value; }
+        get { return damageModificator; }
+        set { damageModificator = value; }
     }
 
     public virtual float SpeedModificator
     {
-        get { return _speedModificator; }
-        set { _speedModificator = value; }
+        get { return speedModificator; }
+        set { speedModificator = value; }
     }
 
     public virtual float LifetimeModificator
     {
-        get { return _lifetimeModificator; }
-        set { _lifetimeModificator = value; }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            IEnemy enemy = collision.transform.GetComponent<IEnemy>();
-            enemy.GetDamage(_damage * _damageModificator);
-        }
-        if(collision.gameObject.tag != "Missile")
-            Destroy(this.gameObject);
+        get { return lifetimeModificator; }
+        set { lifetimeModificator = value; }
     }
 
     private void Awake()
@@ -47,7 +36,7 @@ public class Projectile: MonoBehaviour, IProjectile
 
     private IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(_bulletLifetime);
+        yield return new WaitForSeconds(bulletLifetime);
         Destroy(this.gameObject);
     }
 }

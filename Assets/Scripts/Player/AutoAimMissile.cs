@@ -19,6 +19,17 @@ public class AutoAimMissile : Projectile
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            IEnemy enemy = collision.transform.GetComponent<IEnemy>();
+            enemy.GetDamage(damage * damageModificator);
+        }
+        if (collision.gameObject.tag != "Missile")
+            Destroy(this.gameObject);
+    }
+
     public void SetAimTarget(GameObject target)
     {
         _target = target;
