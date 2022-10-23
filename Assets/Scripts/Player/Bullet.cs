@@ -10,6 +10,7 @@ public class Bullet : Projectile, IProjectile
         {
             IEnemy enemy = collision.transform.GetComponent<IEnemy>();
             enemy.GetDamage(damage * damageModificator);
+            Debug.Log(damageModificator);
         }
         if (collision.gameObject.tag != "Missile")
             Destroy(this.gameObject);

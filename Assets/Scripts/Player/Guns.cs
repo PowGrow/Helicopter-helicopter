@@ -5,6 +5,7 @@ using UnityEngine;
 public class Guns : MonoBehaviour, IShooter
 {
     [SerializeField] private List<Gun> _guns;
+    [SerializeField] private Buffs _buffs;
     private List<Transform> _gunMountPoints;
 
     private  List<float> _gunTimers;
@@ -25,6 +26,7 @@ public class Guns : MonoBehaviour, IShooter
             {
                 var _bullet = Instantiate(_guns[startGunIndex].projectilePrefab) as GameObject;
                 _bullet.transform.SetPositionAndRotation(_gunMountPoints[startGunIndex].position, _gunMountPoints[startGunIndex].rotation);
+                _bullet.GetComponent<IProjectile>().DamageModificator = _buffs.DamageModificator;
                 _gunTimers[startGunIndex] = 0;
             }
         }
