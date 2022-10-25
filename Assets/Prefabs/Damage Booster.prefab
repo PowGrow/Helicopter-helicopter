@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6344871297806466777}
   - component: {fileID: 1686715667171395690}
   - component: {fileID: 7853074803504789700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Damage Booster
   m_TagString: Untagged
   m_Icon: {fileID: 0}

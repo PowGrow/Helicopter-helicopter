@@ -10,24 +10,20 @@ public class AutoAimMissile : Projectile
     {
         if(_target == null)
         {
-            transform.Translate(0, speed * Time.deltaTime, 0);
+            transform.Translate(0, speed * SpeedModificator * Time.deltaTime, 0);
         }
         else
         {
-            transform.position = Vector2.MoveTowards(this.transform.position, _target.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position, _target.transform.position, speed * SpeedModificator * Time.deltaTime);
             transform.up = _target.transform.position - transform.position;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            IEnemy enemy = collision.transform.GetComponent<IEnemy>();
-            enemy.GetDamage(damage * damageModificator);
-        }
-        if (collision.gameObject.tag != "Missile")
-            Destroy(this.gameObject);
+        IEnemy enemy = collision.transform.GetComponent<IEnemy>();
+        enemy.GetDamage(damage * damageModificator);
+        Destroy(this.gameObject);
     }
 
     public void SetAimTarget(GameObject target)

@@ -26,7 +26,9 @@ public class Guns : MonoBehaviour, IShooter
             {
                 var _bullet = Instantiate(_guns[startGunIndex].projectilePrefab) as GameObject;
                 _bullet.transform.SetPositionAndRotation(_gunMountPoints[startGunIndex].position, _gunMountPoints[startGunIndex].rotation);
-                _bullet.GetComponent<IProjectile>().DamageModificator = _buffs.DamageModificator;
+                IProjectile projectile = _bullet.GetComponent<IProjectile>();
+                projectile.DamageModificator = _buffs.DamageModificator;
+                projectile.SpeedModificator = _buffs.SpeedModificator;
                 _gunTimers[startGunIndex] = 0;
             }
         }
