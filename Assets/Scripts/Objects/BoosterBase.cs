@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BoosterBase : MonoBehaviour
+public class BoosterBase : MonoBehaviour
 {
     [SerializeField] protected float value;
+    protected Buffs _playerBuffs;
 
-    protected abstract void ApplyBooster(float _value);
+    private void Awake()
+    {
+        _playerBuffs = Managers.GameObjects.GetObject("Player").GetComponent<Buffs>();
+    }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class UIHealth : MonoBehaviour
 {
-    [SerializeField] private Health _health;
+    private Health _health;
     private TextMeshProUGUI _healthLabel;
     
     private void UpdateHealth()
@@ -14,6 +14,7 @@ public class UIHealth : MonoBehaviour
 
     private void Awake()
     {
+        _health = Managers.GameObjects.GetObject("Player").GetComponent<Health>();
         _healthLabel = this.GetComponent<TextMeshProUGUI>();
         UpdateHealth();
     }

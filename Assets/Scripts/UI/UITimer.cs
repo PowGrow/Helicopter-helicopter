@@ -5,12 +5,13 @@ using UnityEngine;
 public class UITimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _label;
-    [SerializeField] private Buffs _buffs;
+    private Buffs _buffs;
 
     private TextMeshProUGUI _timerLabel;
 
     private void Awake()
     {
+        _buffs = Managers.GameObjects.GetObject("Player").GetComponent<Buffs>();
         _timerLabel = this.GetComponent<TextMeshProUGUI>();
     }
 
