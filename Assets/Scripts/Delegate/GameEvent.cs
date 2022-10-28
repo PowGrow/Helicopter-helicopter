@@ -4,6 +4,5 @@ using UnityEngine;
 
 public static class GameEvent
 {
-    public const string SLOT_DELETED = "SLOT_DELETED";
-    public const string SLOT_SAVED = "SLOT_SAVED";
+    public const string PLAYER_HEALTH_UPDATED = "PlayerHealthUpdated";
 }
