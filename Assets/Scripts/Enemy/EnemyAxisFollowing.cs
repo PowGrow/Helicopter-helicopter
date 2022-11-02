@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyAxisFollowing : DroidEnemy
 {
-    public GameObject player;
+    public GameObject _player;
     public Vector3 movementDirection;
     public float speed;
     public int idDirecetion;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        movementDirection = new Vector3(player.transform.position.x,this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+        _player = GameObject.FindGameObjectWithTag("Player");
+        movementDirection = new Vector3(_player.transform.position.x,this.gameObject.transform.position.y, this.gameObject.transform.position.z);
     }
 
     // Update is called once per frame
@@ -23,8 +23,8 @@ public class EnemyAxisFollowing : DroidEnemy
     void MoveByAxis()
     {
         Debug.Log(idDirecetion);
-        movementDirection = new Vector3(player.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
-        if (!(Mathf.Abs(transform.position.x - player.transform.position.x) < 0.03f))
+        movementDirection = new Vector3(_player.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
+        if (!(Mathf.Abs(transform.position.x - _player.transform.position.x) < 0.03f))
         {
             Vector3 direction = (movementDirection - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
