@@ -180,6 +180,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+--- !u!1 &191222299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+  m_PrefabInstance: {fileID: 1773818849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &191222300
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191222299}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &191222301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191222299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364525e06755ccf48acd1d9b3bca1d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _movementDirection: {x: 0, y: 0, z: 0}
+  _speed: 10
+  idDirecetion: 0
+  _rb: {fileID: 0}
 --- !u!1 &414393171
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +683,10 @@ PrefabInstance:
     - target: {fileID: 8565949780539230665, guid: 54bdc54d5df2caf4190ad5f625129333, type: 3}
       propertyPath: m_Name
       value: Helicopter
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565949780539230666, guid: 54bdc54d5df2caf4190ad5f625129333, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8565949780539230668, guid: 54bdc54d5df2caf4190ad5f625129333, type: 3}
       propertyPath: m_RootOrder
@@ -1376,7 +1423,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3944547518975744942, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
 --- !u!1 &1949698285
 GameObject:

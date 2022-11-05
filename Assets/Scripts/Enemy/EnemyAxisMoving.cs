@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAxisMoving : MonoBehaviour
-{
-    public GameObject player;
-    public Vector3 firstDirection;
-    public Vector3 secondDirection;
-    public Vector3 movementDirection;
-    public float speed;
-    public int idDirecetion;
+{ 
+    [SerializeField]private Vector3 _movementDirection;
+    [SerializeField]private float _speed;
+    [SerializeField]private int idDirecetion;
+    [SerializeField] private Rigidbody2D _rb;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        movementDirection = firstDirection;
+        _rb = this.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -25,25 +22,22 @@ public class EnemyAxisMoving : MonoBehaviour
     void MoveByAxis()
     {
         Debug.Log(idDirecetion);
-        Vector3 direction = (movementDirection - transform.position).normalized;
-        transform.position += direction * speed * Time.deltaTime;
-        if (idDirecetion == 1 && transform.position.x < movementDirection.x)
+        Vector3 direction = (_movementDirection - transform.position).normalized;
+        _rb.velocity = new Vector2(direction.x, 0) * _speed * Time.deltaTime;
+        if (Mathf.Abs(transform.position.x - _movementDirection.x)<0.05f)
         {
-            idDirecetion = -1;
-            movementDirection = secondDirection;
-        }
-        if (idDirecetion == -1 && transform.position.x > movementDirection.x)
-        {
-            idDirecetion = 1;
-            movementDirection = firstDirection;
+            _movementDirection *= -1;
         }
 
     }
     void OnDrawGizmosSelected()
     {
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(firstDirection, new Vector3(1, 1, 1));
+        Vector3 _gizmosDrawLeft = new Vector3(transform.position.x- _movementDirection.x, _movementDirection.y, _movementDirection.z);
+        Gizmos.DrawWireCube(_gizmosDrawLeft, new Vector3(1, 1, 1));
+        Vector3 _gizmosDraw = new Vector3(transform.position.x + _movementDirection.x, _movementDirection.y, _movementDirection.z);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(secondDirection, new Vector3(1, 1, 1));
+        Gizmos.DrawWireCube(_gizmosDraw, new Vector3(1, 1, 1));
     }
 }
