@@ -22,11 +22,12 @@ public class EnemyFollow : DroidEnemy
     {
         Vector3 direction = player.transform.position - transform.position;
         LookAtPlayer(direction);
+        direction = new Vector2(direction.x, direction.y);
         EnemyMove(direction.normalized);
     }
     void EnemyMove(Vector3 direction)//Движкние к игроку
     {
-        transform.position += direction * speed * Time.deltaTime;
+        rb.velocity = direction * speed * Time.deltaTime;
     }
     void LookAtPlayer(Vector3 direction)//Постоянный поворот на игрока
     {
