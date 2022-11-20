@@ -7,7 +7,7 @@ public class EnemyAxisFollowing : DroidEnemy
     
     [SerializeField]private GameObject _player;
     [SerializeField]private Vector3 _movementDirection;
-    [SerializeField]private float _speed;
+    [SerializeField]private float _speed = 20;
     [SerializeField]private int idDirecetion;
     [SerializeField] Rigidbody2D _rb;
     void Start()

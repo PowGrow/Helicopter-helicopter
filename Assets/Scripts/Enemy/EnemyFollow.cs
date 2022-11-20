@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyFollow : DroidEnemy
 {
-    private GameObject player;
+    public GameObject player;
     private Rigidbody2D rb;
     public float offset;
-    public float speed = 1;
+    private float speed = 1;
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();

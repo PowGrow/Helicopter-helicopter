@@ -5,6 +5,7 @@ using UnityEngine;
 public class DroidEnemy : MonoBehaviour, IEnemy
 {
     private SpriteRenderer _sprite;
+    private SpawnEnemies spawn;
     public float Health { get; private set; }
 
     public void GetDamage(float value)
@@ -17,6 +18,7 @@ public class DroidEnemy : MonoBehaviour, IEnemy
 
     private void Die()
     {
+        spawn.enemyList[spawn.lineOfEnemies].Remove(this.gameObject);
         Destroy(this.gameObject);
     }
 
@@ -29,6 +31,7 @@ public class DroidEnemy : MonoBehaviour, IEnemy
 
     private void Awake()
     {
+        spawn = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnEnemies>();
         Health = 100;
         _sprite = GetComponent<SpriteRenderer>();
     }

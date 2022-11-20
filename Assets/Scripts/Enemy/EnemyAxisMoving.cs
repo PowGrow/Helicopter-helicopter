@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class EnemyAxisMoving : MonoBehaviour
 { 
-    [SerializeField]private Vector3 _movementDirection;
-    [SerializeField]private float _speed;
-    [SerializeField]private int idDirecetion;
+    [SerializeField]public Vector3 _movementDirection;
+    [SerializeField]private float _speed = 15f;
+    [SerializeField]private int idDirecetion=1;
     [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Vector3 basePosition;
+    [SerializeField] private Vector3 endlessPosition;
     void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
+        basePosition = this.transform.position;
+        endlessPosition = basePosition + _movementDirection;
     }
 
     // Update is called once per frame
@@ -21,12 +25,13 @@ public class EnemyAxisMoving : MonoBehaviour
     }
     void MoveByAxis()
     {
-        Debug.Log(idDirecetion);
-        Vector3 direction = (_movementDirection - transform.position).normalized;
-        _rb.velocity = new Vector2(direction.x, 0) * _speed * Time.deltaTime;
-        if (Mathf.Abs(transform.position.x - _movementDirection.x)<0.05f)
+        Vector3 direction = (endlessPosition - basePosition).normalized;
+        _rb.velocity = new Vector2(idDirecetion, 0) * _speed * Time.deltaTime;
+        if (Mathf.Abs(transform.position.x - endlessPosition.x)<0.05f)
         {
-            _movementDirection *= -1;
+            if (idDirecetion == 1) endlessPosition = basePosition - _movementDirection;
+            else endlessPosition = basePosition + _movementDirection;
+            idDirecetion *= -1;
         }
 
     }
