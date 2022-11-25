@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+//Перечисление всех возможных типов оружия
 public enum GunType
 {
-    Machinegun,
+    Minigun,
     Rocketlauncher,
-    Laser
+    Laser,
+    AutoAimRocketlauncher,
 }

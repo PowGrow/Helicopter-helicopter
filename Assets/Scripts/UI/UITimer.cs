@@ -1,7 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
-
+//Класс выводящий информацию о оставшемся времени бафов игрока
 public class UITimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _label;
@@ -17,20 +17,24 @@ public class UITimer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(_label.name == "Damage label" && _buffs.DamageModificator > 1)
+        //Если модификатор получен, то в зависимосте от того где установлен компонент выводим информацию о времени баффа
+        if(_buffs.DamageModificator > 1)
         {
-            _label.color = Color.white;
-            _timerLabel.text = Math.Round((decimal)_buffs.DamageTimer,0).ToString();
-        }
-        else if(_label.name == "Speed label" && _buffs.SpeedModificator > 1)
-        {
-            _label.color = Color.white;
-            _timerLabel.text = Math.Round((decimal)_buffs.SpeedTimer, 0).ToString();
-        }
-        else
-        {
-            _timerLabel.text = " ";
-            _label.color = Color.gray;
+            switch(_label.name)
+            {
+                case ("Damage label"):
+                    _label.color = Color.white;
+                    _timerLabel.text = Math.Round((decimal)_buffs.DamageTimer, 0).ToString();
+                    break;
+                case ("Speed label"):
+                    _label.color = Color.white;
+                    _timerLabel.text = Math.Round((decimal)_buffs.SpeedTimer, 0).ToString();
+                    break;
+                default:
+                    _timerLabel.text = " ";
+                    _label.color = Color.gray;
+                    break;
+            }
         }
     }
 }

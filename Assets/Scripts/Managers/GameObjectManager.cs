@@ -4,7 +4,21 @@ public class GameObjectManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status { get; private set; }
 
-    public List<GameObject> allObjects = new List<GameObject>();
+    private List<GameObject> _allObjects = new List<GameObject>();
+
+    private List<IProjectile> _projectiles = new List<IProjectile>();
+
+    public List<GameObject> AllObjects
+    {
+        get { return _allObjects; }
+        set { _allObjects = value; }
+    }
+
+    public List<IProjectile> Projectiles
+    {
+        get { return _projectiles; }
+        set { _projectiles = value; }
+    }
 
     public void Startup()
     {
@@ -13,28 +27,13 @@ public class GameObjectManager : MonoBehaviour, IGameManager
         status = ManagerStatus.Started;
     }
 
-    public void ClearList()
-    {
-        allObjects.Clear();
-    }
-
     public GameObject GetObject(string tag)
     {
-        foreach (GameObject obj in allObjects)
+        foreach (GameObject obj in AllObjects)
         {
             if(obj.tag == tag)
                 return obj;
         }
         return null;
-    }
-
-    public void Add(GameObject _gameObject)
-    {
-        allObjects.Add(_gameObject);
-    }
-
-    public void Remove(GameObject _gameObject)
-    {
-        allObjects.Remove(_gameObject);
     }
 }

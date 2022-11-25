@@ -1,46 +1,50 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyFollow : DroidEnemy
 {
-    private GameObject player;
-    private Rigidbody2D rb;
-    public float offset;
-    public float speed = 1;
-    void Start()
+    [SerializeField] private GameObject _player;
+    [SerializeField] private float _offset;
+    [SerializeField] private float _speed = 1;
+
+    private Health _playerHealth;
+
+    void EnemyMove()//Движкние к игроку
     {
-        rb = this.gameObject.GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        transform.position = Vector2.MoveTowards(this.transform.position, _player.transform.position, Time.deltaTime * _speed);
     }
-    private void OnEnable()
+    void LookAtPlayer()//Постоянный поворот на игрока
     {
-        StartCoroutine(DestroyByTime());
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 direction = player.transform.position - transform.position;
-        LookAtPlayer(direction);
-        EnemyMove(direction.normalized);
-    }
-    void EnemyMove(Vector3 direction)//Движкние к игроку
-    {
-        transform.position += direction * speed * Time.deltaTime;
-    }
-    void LookAtPlayer(Vector3 direction)//Постоянный поворот на игрока
-    {
+        Vector2 direction = this.transform.position - _player.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle + offset));
+        transform.rotation = Quaternion.Euler(0, 0, angle + _offset);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //пока не доделано
-        GetDamage(100);
-    }
+
     private IEnumerator DestroyByTime()
     {
         yield return new WaitForSeconds(5f);
         Destroy(this.gameObject);
+    }
+    void Update()
+    {
+        LookAtPlayer();
+        EnemyMove();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //пока не доделано
+        GetDamage(100);
+        _playerHealth.GetDamage(10);
+    }
+
+    void Awake()
+    {
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _playerHealth = _player.GetComponent<Health>();
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(DestroyByTime());
     }
 }

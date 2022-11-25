@@ -9,16 +9,13 @@ public class LevelManager : MonoBehaviour,IGameManager
     public void Startup()
     {
         Debug.Log("Mission manager starting...");
-
-        PlayerPrefs.SetString("swapDirection", "start");
-
         status = ManagerStatus.Started;
     }
 
 
     public void ChangeLevel(string levelName)
     {
-        Managers.GameObjects.ClearList();
+        Managers.GameObjects.AllObjects.Clear();
         SceneManager.LoadScene(levelName);
     }
 
@@ -36,9 +33,14 @@ public class LevelManager : MonoBehaviour,IGameManager
         SceneManager.LoadScene(++_currentBuildIndex);
     }
 
-    public object GetData()
+    public void GoTo(int sceneBuildIndex)
     {
-        return SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneBuildIndex);
+    }
+
+    public int SceneId()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 
     public void UpdateData(object sceneName)

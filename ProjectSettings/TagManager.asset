@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Laser
   - Missile
+  - Gun
+  - Cabin
+  - Wing
   layers:
   - Default
   - TransparentFX

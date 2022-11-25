@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameObjectAutoAdd : MonoBehaviour
@@ -7,11 +5,11 @@ public class GameObjectAutoAdd : MonoBehaviour
 
     private void Awake()
     {
-        Managers.GameObjects.Add(gameObject);
+        Managers.GameObjects.AllObjects.Add(gameObject);
     }
 
     private void OnDestroy()
     {
-        Managers.GameObjects.Remove(gameObject);
+        Managers.GameObjects.AllObjects.Remove(gameObject);
     }
 }
