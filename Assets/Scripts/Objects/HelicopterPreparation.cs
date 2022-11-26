@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HelicopterPreparation : MonoBehaviour
 {
@@ -13,9 +12,8 @@ public class HelicopterPreparation : MonoBehaviour
                                             this.transform.position.y, this.transform.position.z); //Устанавливаем позицию сверху слева, в зависимости от размера экрана
                 break;
             case 3:
-                //var widthCenter = (Camera.main.orthographicSize * ((float)Screen.width / (float)Screen.height)) / 2;
-                //var heightBottom = -1 * Camera.main.orthographicSize + this.gameObject.transform.localScale.x * 2;
-                //this.transform.position = new Vector3(widthCenter, heightBottom, 0);
+                var heightBottom = -1 * Camera.main.orthographicSize + this.gameObject.transform.localScale.x;
+                this.transform.position = new Vector3(0, heightBottom, 0);
                 break;
         }
 
