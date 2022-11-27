@@ -1,5 +1,3 @@
-using Newtonsoft.Json.Linq;
-using System;
 using UnityEngine;
 
 public class PreparationData : MonoBehaviour

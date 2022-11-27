@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyFollow : DroidEnemy
+public class EnemyFollow : EnemyBase
 {
     [SerializeField] private GameObject _player;
     [SerializeField] private float _offset;

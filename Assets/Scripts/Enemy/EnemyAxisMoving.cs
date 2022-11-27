@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAxisMoving : DroidEnemy
+public class EnemyAxisMoving : EnemyBase
 {
     public GameObject player;
     public Vector3 firstDirection;

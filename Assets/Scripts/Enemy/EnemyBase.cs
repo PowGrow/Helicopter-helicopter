@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DroidEnemy : MonoBehaviour, IEnemy
+public class EnemyBase : MonoBehaviour, IEnemy
 {
     private SpriteRenderer _sprite;
     public float Health { get; private set; }
