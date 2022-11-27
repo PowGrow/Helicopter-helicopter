@@ -9,6 +9,7 @@ public class HelicopterPreparation : MonoBehaviour
 
     void Start()
     {
+        Managers.Configuration.LoadHelicopterData();
         switch (Managers.Levels.SceneId())
         {
             case 2:
@@ -16,7 +17,6 @@ public class HelicopterPreparation : MonoBehaviour
                                             this.transform.position.y, this.transform.position.z); //Устанавливаем позицию сверху слева, в зависимости от размера экрана
                 break;
             case 3:
-                Managers.Configuration.LoadHelicopterData();
                 var heightBottom = -1 * Camera.main.orthographicSize + this.gameObject.transform.localScale.x;
                 this.transform.position = new Vector3(0, heightBottom, 0);
                 break;

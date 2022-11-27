@@ -39,7 +39,7 @@ public class PreparationData : MonoBehaviour
         set { _selectedObjectPrevious = value; }
     }
 
-    public GameObject ChangePart(int partId) //Замена запчастей вертолёта, если изменяется, UPD: возвращаемый объект на данный момент рудементарен
+    public GameObject ChangePart(int partId) //Замена запчастей вертолёта, если изменяется
     {
         var objectId = _selectedHelicopterPart.Id;
         if (partId != objectId)

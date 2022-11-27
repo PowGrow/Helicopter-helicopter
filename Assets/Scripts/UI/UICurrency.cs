@@ -17,10 +17,10 @@ public class UICurrency : MonoBehaviour
 
     private void OnEnable() //Подпись на событие изменения количества валюты
     {
-        Messenger.AddListener(GameEvent.CURRENCY_CHANGED, SetCurrencyToTextLabel);
+        Managers.Configuration.OnCurrencyChanged += SetCurrencyToTextLabel;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
-        Messenger.RemoveListener(GameEvent.CURRENCY_CHANGED, SetCurrencyToTextLabel);
+        Managers.Configuration.OnCurrencyChanged -= SetCurrencyToTextLabel;
     }
 }

@@ -14,6 +14,8 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
 
     public Func<GameObject> OnSettingHelicopterGameObject;
     public Action<GameObject, int> OnClearSelection;
+    public Action OnCurrencyChanged;
+
     public GameObject HelicopterObject
     {
         get 
@@ -39,7 +41,7 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
             _currency = value;
             var sceneId = SceneManager.GetActiveScene().buildIndex;
             if (sceneId != 0 && sceneId != 1)
-                Messenger.Broadcast(GameEvent.CURRENCY_CHANGED);
+                OnCurrencyChanged.Invoke();
         }
     }
 
@@ -66,18 +68,20 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
     }
     public void LoadHelicopterData()
     {
-        PreparationData _preparationData = new PreparationData();
-        var helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
-        _preparationData.TryToChangePart(helicopterParts[0], _helicopterData[0].Value);
-        _preparationData.TryToChangePart(helicopterParts[1], _helicopterData[1].Value);
-        helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().ToList();
-        _helicopterData.Reverse();
-        GameObject lastSelectedGameObject = null;
-        for (int partIndex = 0; partIndex < helicopterParts.Count; partIndex++)
+        if(_helicopterData.Count != 0)
         {
-            if (helicopterParts[partIndex].Type == "Gun")
-                lastSelectedGameObject = _preparationData.TryToChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
+            PreparationData _preparationData = new PreparationData();
+            var helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
+            _preparationData.TryToChangePart(helicopterParts[0], _helicopterData[0].Value);
+            _preparationData.TryToChangePart(helicopterParts[1], _helicopterData[1].Value);
+            helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().ToList();
+            _helicopterData.Reverse();
+            GameObject lastSelectedGameObject = null;
+            for (int partIndex = 0; partIndex < helicopterParts.Count; partIndex++)
+            {
+                if (helicopterParts[partIndex].Type == "Gun")
+                    lastSelectedGameObject = _preparationData.TryToChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
+            }
         }
-        OnClearSelection?.Invoke(lastSelectedGameObject, 1);
     }
 }

@@ -11,17 +11,14 @@ public class PreparationsController : MonoBehaviour
     private List<Button> PreviewButtonList;
 
 
-    public Func<string, IHelicopterPart, List<Button>>  OnCreatePreviewButtons;
-    public Action<bool>                                 OnUnlockingPreview;
-    public Func<GameObject, GameObject, GameObject>     OnSelectObject;
-    public Action<GameObject,IHelicopterPart,GameObject>OnSelectPreviewButton;
-    public Action                                       OnSwitchingMainMenu;
-    public Action<bool>                                 OnPartWasUnlocked;
-    public Action<bool>                                 OnSwitchingDescriptionContainer;
-
-    public Func<GameObject>     GettingSelectedObject;
-    public Action<GameObject>   SettingSelectedObject;
-    public Action<GameObject, int>   OnClearSelection;
+    public Func<string, IHelicopterPart, List<Button>>      OnCreatePreviewButtons;
+    public Action<bool>                                     OnUnlockingPreview;
+    public Func<GameObject, GameObject, GameObject>         OnSelectObject;
+    public Action<GameObject,IHelicopterPart,GameObject>    OnSelectPreviewButton;
+    public Action                                           OnSwitchingMainMenu;
+    public Action<bool>                                     OnPartWasUnlocked;
+    public Action<bool>                                     OnSwitchingDescriptionContainer;
+    public Action<GameObject, int>                          OnClearSelection;
 
     private void OnScreenClick(Vector3 mousePosition) //Вызывается при клике на экран
     {
