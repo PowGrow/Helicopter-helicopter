@@ -9,7 +9,6 @@ public class UIPreparation : MonoBehaviour
 {
     [SerializeField] private PreparationsController         _preparationController;
     [SerializeField] private MainMenuController             _mainMenuController;
-    [SerializeField] private UIDescriptionContainer         _uiDescriptionContainer;//Объект контейнера описания объекта
     [SerializeField] private GameObject         _deployButton;//Кнопка начала миссии
     [SerializeField] private GameObject         _previewPrefab; //Префаб кнопок выбора компонентов вертолёта
     [SerializeField] private Transform          _partsPreviewButtonContainer; //Ссылка на родительский контейнер всех кнопок выбора компонентов вертолёта
@@ -57,20 +56,16 @@ public class UIPreparation : MonoBehaviour
         previewButton.ItemPreviewName = part.GetType().GetField("Id").GetValue(part).ToString();
         return previewButton;
     }
-    public List<Button> CreatePreviewButtons(string objectTag)
+    public List<Button> CreatePreviewButtons(string objectTag, IHelicopterPart selectedPart)
     {
         List<Button> buttonList = new List<Button>();
-        var selectedObjectSprite = PreparationsController.SelectedHelicopterPart.Sprite;
         var buttonCount = Utils.ObjectCount(objectTag);
-        
         for(int buttonIndex = 0; buttonIndex < buttonCount; buttonIndex++)
         {
             var part = Resources.Load($"ScriptableObjects/{objectTag}/part_{buttonIndex}", Type.GetType(objectTag));
             var previewButton = CreatePreviewButton(_previewPrefab,_previewOffset,buttonIndex, part);
             if (Managers.Configuration.UnlockedObjects[objectTag][buttonIndex] == false)
                 previewButton.IsLocked = true;
-            if (previewButton.ItemPreviewImageSprite.name == selectedObjectSprite.name)
-                SelectPreviewButton(previewButton.gameObject);
             buttonList.Add(previewButton.gameObject.GetComponent<Button>());
         }
         return buttonList;
@@ -98,11 +93,9 @@ public class UIPreparation : MonoBehaviour
         SelectDraw(objectToSelect, previouslySelectedObject, 1); //Визуально выбираем новый объект
         return objectToSelect;
     }
-    public void SelectPreviewButton(GameObject previewObject)
+    public void SelectPreviewButton(GameObject previewObject, IHelicopterPart selectedPart, GameObject selectedPreview)
     {
-        SelectDraw(previewObject, PreparationsController.SelectedPreview, 2);
-        PreparationsController.SelectedPreview = previewObject;
-        var selectedPart = PreparationsController.SelectedHelicopterPart;
+        SelectDraw(previewObject, selectedPreview, 2);
         _partsDescription.SetDescriptionText(selectedPart.Description);
         _partsDescription.SetPriceText(selectedPart.Price.ToString());
         _deployButton.SetActive(false);
@@ -128,12 +121,10 @@ public class UIPreparation : MonoBehaviour
         _gameSavedLabel.gameObject.SetActive(false);
         _gameSavedLabel.fontSize = 1;
     }
-
     private void Awake()
     {
         _previewOffset = (float)Screen.width / (float)Screen.height; //Устанавливаем значение отступа кнопок в зависимости размера экрана
     }
-
     private void OnEnable()
     {
         _preparationController.OnClearSelection += ClearSelection;
@@ -143,7 +134,6 @@ public class UIPreparation : MonoBehaviour
         _preparationController.OnSwitchingMainMenu += SwitchMainMenu;
         _mainMenuController.OnGameSaved += ShowSavedGameLabel;
     }
-
     private void OnDisable()
     {
         _preparationController.OnClearSelection -= ClearSelection;

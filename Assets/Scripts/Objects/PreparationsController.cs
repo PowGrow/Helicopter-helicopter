@@ -15,14 +15,13 @@ public class PreparationsController : MonoBehaviour
     private List<Button> PreviewButtonList;
 
     public Action<GameObject, int>                      OnClearSelection;
-    public Func<string,List<Button>>                    OnCreatePreviewButtons;
+    public Func<string, IHelicopterPart, List<Button>>  OnCreatePreviewButtons;
     public Action<bool>                                 OnUnlockingPreview;
     public Func<GameObject, GameObject, GameObject>     OnSelectObject;
-    public Action<GameObject>                           OnSelectPreviewButton;
-    public Action                                       OnSwitchingMainMenu;
+    public Action<GameObject,IHelicopterPart,GameObject>OnSelectPreviewButton;
+    public Action                                  OnSwitchingMainMenu;
     public Action<bool>                                 OnPartWasUnlocked;
     public Action<bool>                                 OnSwitchingDescriptionContainer;
-
 
     private GameObject SelectedObject
     {
@@ -45,7 +44,7 @@ public class PreparationsController : MonoBehaviour
     {
         get { return _selectedHelicopterPart; }
     }
-    public static GameObject SelectedPreview
+    private GameObject SelectedPreview
     {
         get { return _selectedPreview; }
         set { _selectedPreview = value; }
@@ -70,14 +69,18 @@ public class PreparationsController : MonoBehaviour
             OnUnlockingPreview.Invoke(true);
             ResetSelectionToBoughtPart();
             SelectedObject = OnSelectObject.Invoke(_screenHit.collider.gameObject, SelectedObject);
-            PreviewButtonList = OnCreatePreviewButtons.Invoke(SelectedHelicopterPart.Type);
+            PreviewButtonList = OnCreatePreviewButtons.Invoke(SelectedHelicopterPart.Type, SelectedHelicopterPart);
             for(int index = 0; index < PreviewButtonList.Count; index++)
             {
                 var buttonIndex = index;
                 PreviewButtonList[index].onClick.AddListener(() => OnPreviewButtonClick(buttonIndex));
+                if (Convert.ToInt32(PreviewButtonList[index].gameObject.name) == SelectedHelicopterPart.Id)
+                {
+                    OnSelectPreviewButton.Invoke(PreviewButtonList[index].gameObject, SelectedHelicopterPart, SelectedPreview);
+                    SelectedPreview = PreviewButtonList[index].gameObject;
+                }
             }
         }
-
     }
     private void OnPreviewButtonClick(int index) //Выполняется при выборе одной из частей вертолёта, что бы заменить текущую часть
     {
@@ -91,7 +94,8 @@ public class PreparationsController : MonoBehaviour
             var newSelectedObject = ChangePart(partIndex);
             if (newSelectedObject != null)
                 SelectedObject = OnSelectObject.Invoke(newSelectedObject, SelectedObject);
-            OnSelectPreviewButton.Invoke(PreviewButtonList[partIndex].gameObject);
+            OnSelectPreviewButton.Invoke(PreviewButtonList[partIndex].gameObject,SelectedHelicopterPart,SelectedPreview);
+            SelectedPreview = PreviewButtonList[partIndex].gameObject;
             OnSwitchingDescriptionContainer.Invoke(true);
             OnPartWasUnlocked.Invoke(Managers.Configuration.UnlockedObjects[SelectedHelicopterPart.Type][SelectedHelicopterPart.Id]);
         }
@@ -122,6 +126,7 @@ public class PreparationsController : MonoBehaviour
             Utils.TimeScale();
         }
         OnClearSelection.Invoke(SelectedObject, 1);
+        OnSwitchingDescriptionContainer.Invoke(false);
         SelectedObject = null;
     }
     public GameObject ChangePart(int partId) //Замена запчастей вертолёта, если изменяется, UPD: возвращаемый объект на данный момент рудементарен
