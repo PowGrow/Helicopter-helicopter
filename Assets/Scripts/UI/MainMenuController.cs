@@ -1,11 +1,14 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIMainMenu : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] Button _continueButton;
-    [SerializeField] TextMeshProUGUI _saveGameLabel;
+    [SerializeField] private Button _continueButton;
+    [SerializeField] private TextMeshProUGUI _saveGameLabel;
+
+    public Action OnGameSaved;
     public void OnNewGameButtonClick()
     {
         if(Managers.Levels.SceneId() != 1)
@@ -37,7 +40,7 @@ public class UIMainMenu : MonoBehaviour
     {
         Managers.Data.SaveGameState();
         Utils.TimeScale();
-        UIPreparation.Instance.ShowSavedGameLabel();
+        OnGameSaved.Invoke();
         this.gameObject.SetActive(false);
     }
 

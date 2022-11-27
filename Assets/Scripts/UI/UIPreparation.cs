@@ -7,10 +7,9 @@ using UnityEngine.UI;
 
 public class UIPreparation : MonoBehaviour
 {
-    [SerializeField] private PreparationsController _preparationController;
-    [SerializeField] private PreviewButton _previewButton;
+    [SerializeField] private PreparationsController         _preparationController;
+    [SerializeField] private MainMenuController             _mainMenuController;
     [SerializeField] private UIDescriptionContainer         _uiDescriptionContainer;//Объект контейнера описания объекта
-    [SerializeField] private GameObject         _mainMenuObject;//Объект главного меню
     [SerializeField] private GameObject         _deployButton;//Кнопка начала миссии
     [SerializeField] private GameObject         _previewPrefab; //Префаб кнопок выбора компонентов вертолёта
     [SerializeField] private Transform          _partsPreviewButtonContainer; //Ссылка на родительский контейнер всех кнопок выбора компонентов вертолёта
@@ -21,12 +20,7 @@ public class UIPreparation : MonoBehaviour
     [SerializeField] private TextMeshProUGUI    _gameSavedLabel;//Лейбл "Игра сохранена"
 
     private float                   _previewOffset; //Сдвиг по горизонтали для каждой кнопки предпосмотра элементов вертолёта
-    private static UIPreparation    _instance; //Поле ссылка на экземпляр класса UIPreparation
-  
-    public static UIPreparation Instance //Публичное свойство передающее ссылку на экземпляр класса UIPreparation
-    {
-        get { return _instance; }
-    }
+
     public Transform PartsPreviewButtonParent
     {
         get { return _partsPreviewButtonContainer; }
@@ -111,26 +105,17 @@ public class UIPreparation : MonoBehaviour
         var selectedPart = PreparationsController.SelectedHelicopterPart;
         _partsDescription.SetDescriptionText(selectedPart.Description);
         _partsDescription.SetPriceText(selectedPart.Price.ToString());
-        SwitchDescriptionContainer(true);
-        if (Managers.Configuration.UnlockedObjects[selectedPart.Type][selectedPart.Id])
-            _uiDescriptionContainer.UnlockButton = false;
-        else
-            _uiDescriptionContainer.UnlockButton = true;
+        _deployButton.SetActive(false);
     }
     public void ClearSelection(GameObject selectedObject, int rendererType)
     {
         SelectDraw(null, selectedObject, rendererType);
         ClearPreviewButtons();
-        SwitchDescriptionContainer(false);
-    }
-    public void SwitchDescriptionContainer(bool state)
-    {
-        _uiDescriptionContainer.GameObject.SetActive(state);
-        _deployButton.SetActive(!state);
+        _deployButton.SetActive(true);
     }
     public void SwitchMainMenu()
     {
-        _mainMenuObject.SetActive(!_mainMenuObject.activeSelf);
+        _mainMenuController.gameObject.SetActive(!_mainMenuController.gameObject.activeSelf);
     }
     public void ShowSavedGameLabel()
     {
@@ -147,9 +132,6 @@ public class UIPreparation : MonoBehaviour
     private void Awake()
     {
         _previewOffset = (float)Screen.width / (float)Screen.height; //Устанавливаем значение отступа кнопок в зависимости размера экрана
-        //Указываем ссылку на этот экземпляр класса UIPreparation
-        if (_instance == null)
-            _instance = this;
     }
 
     private void OnEnable()
@@ -159,6 +141,7 @@ public class UIPreparation : MonoBehaviour
         _preparationController.OnSelectObject += SelectObject;
         _preparationController.OnSelectPreviewButton += SelectPreviewButton;
         _preparationController.OnSwitchingMainMenu += SwitchMainMenu;
+        _mainMenuController.OnGameSaved += ShowSavedGameLabel;
     }
 
     private void OnDisable()
@@ -168,5 +151,6 @@ public class UIPreparation : MonoBehaviour
         _preparationController.OnSelectObject -= SelectObject;
         _preparationController.OnSelectPreviewButton -= SelectPreviewButton;
         _preparationController.OnSwitchingMainMenu -= SwitchMainMenu;
+        _mainMenuController.OnGameSaved -= ShowSavedGameLabel;
     }
 }

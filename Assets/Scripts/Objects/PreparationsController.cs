@@ -13,12 +13,15 @@ public class PreparationsController : MonoBehaviour
     private static int _previousId = -1;
     private static PreparationsController _instance;
     private List<Button> PreviewButtonList;
+
     public Action<GameObject, int>                      OnClearSelection;
     public Func<string,List<Button>>                    OnCreatePreviewButtons;
     public Action<bool>                                 OnUnlockingPreview;
     public Func<GameObject, GameObject, GameObject>     OnSelectObject;
     public Action<GameObject>                           OnSelectPreviewButton;
     public Action                                       OnSwitchingMainMenu;
+    public Action<bool>                                 OnPartWasUnlocked;
+    public Action<bool>                                 OnSwitchingDescriptionContainer;
 
 
     private GameObject SelectedObject
@@ -63,7 +66,9 @@ public class PreparationsController : MonoBehaviour
         {
             OnClearSelection?.Invoke(SelectedObject, 1);
             OnClearSelection.Invoke(SelectedPreview, 2);
-            IsPartUnlocked();
+            OnSwitchingDescriptionContainer.Invoke(true);
+            OnUnlockingPreview.Invoke(true);
+            ResetSelectionToBoughtPart();
             SelectedObject = OnSelectObject.Invoke(_screenHit.collider.gameObject, SelectedObject);
             PreviewButtonList = OnCreatePreviewButtons.Invoke(SelectedHelicopterPart.Type);
             for(int index = 0; index < PreviewButtonList.Count; index++)
@@ -87,6 +92,8 @@ public class PreparationsController : MonoBehaviour
             if (newSelectedObject != null)
                 SelectedObject = OnSelectObject.Invoke(newSelectedObject, SelectedObject);
             OnSelectPreviewButton.Invoke(PreviewButtonList[partIndex].gameObject);
+            OnSwitchingDescriptionContainer.Invoke(true);
+            OnPartWasUnlocked.Invoke(Managers.Configuration.UnlockedObjects[SelectedHelicopterPart.Type][SelectedHelicopterPart.Id]);
         }
     }
 
@@ -108,7 +115,7 @@ public class PreparationsController : MonoBehaviour
     }
     private void EscapeButtonPressed() //При нажатии кнопки Escape, выходит из выбора компонентов
     {
-        IsPartUnlocked();
+        ResetSelectionToBoughtPart();
         if (SelectedObject == null)
         {
             OnSwitchingMainMenu.Invoke();
@@ -153,7 +160,7 @@ public class PreparationsController : MonoBehaviour
         SelectedObject.SetActive(true);
         return SelectedObject;
     }
-    public void IsPartUnlocked() //Метод сбрасывающий выбор компонента на предыдущий разблокированный, в случае если новый выбраный не был куплен
+    public void ResetSelectionToBoughtPart() //Метод сбрасывающий выбор компонента на предыдущий разблокированный, в случае если новый выбраный не был куплен
     {
         if (SelectedObject != null)
         {

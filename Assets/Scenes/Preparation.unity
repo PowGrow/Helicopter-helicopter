@@ -1450,7 +1450,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1369363028}
   - component: {fileID: 1369363030}
-  - component: {fileID: 1369363031}
   - component: {fileID: 1369363029}
   m_Layer: 0
   m_Name: DescriptionContainer
@@ -1466,20 +1465,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369363027}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1783468862}
   - {fileID: 422349872}
-  m_Father: {fileID: 1442048902}
-  m_RootOrder: 2
+  m_Father: {fileID: 1692783370}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 50, y: -390}
-  m_SizeDelta: {x: -800, y: 300}
+  m_AnchoredPosition: {x: 60, y: 150}
+  m_SizeDelta: {x: 1120, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1369363029
 MonoBehaviour:
@@ -1519,20 +1518,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369363027}
   m_CullTransparentMesh: 1
---- !u!114 &1369363031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369363027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77fd8e4bce3983d4fbede9b65302cf30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _unlockButton: {fileID: 422349868}
-  _preparationController: {fileID: 1442048903}
 --- !u!1 &1442048897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,8 +1552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _preparationController: {fileID: 1442048903}
-  _uiDescriptionContainer: {fileID: 1369363031}
-  _mainMenuObject: {fileID: 17782568}
+  _mainMenuController: {fileID: 17782570}
+  _uiDescriptionContainer: {fileID: 0}
   _deployButton: {fileID: 2072550647}
   _previewPrefab: {fileID: 1949283632568801539, guid: be47d81b302d66a42a2879db11bb42b5, type: 3}
   _partsPreviewButtonContainer: {fileID: 1563237119}
@@ -1652,7 +1637,7 @@ RectTransform:
   m_Children:
   - {fileID: 2072550648}
   - {fileID: 1563237119}
-  - {fileID: 1369363028}
+  - {fileID: 1692783370}
   - {fileID: 541281577}
   - {fileID: 17782569}
   - {fileID: 2048981748}
@@ -1676,7 +1661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d67ceb32a37919478a814be7d7ad0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preparationUI: {fileID: 1442048898}
 --- !u!1 &1563237118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1713,6 +1697,54 @@ RectTransform:
   m_AnchoredPosition: {x: -1410, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
+--- !u!1 &1692783369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1692783370}
+  - component: {fileID: 1692783371}
+  m_Layer: 0
+  m_Name: Description
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1692783370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692783369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1369363028}
+  m_Father: {fileID: 1442048902}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1692783371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692783369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fd8e4bce3983d4fbede9b65302cf30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _descriptionContainer: {fileID: 1369363027}
+  _unlockButton: {fileID: 422349868}
+  _preparationController: {fileID: 1442048903}
 --- !u!1 &1783468861
 GameObject:
   m_ObjectHideFlags: 0
