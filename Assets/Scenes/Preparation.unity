@@ -374,7 +374,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1442048903}
+      - m_Target: {fileID: 1746200466}
         m_TargetAssemblyTypeName: PreparationsController, Assembly-CSharp
         m_MethodName: UnlockButtonClick
         m_Mode: 1
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fbbe4a4f6b4cd4b8a24c7043f9ca37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _preparationData: {fileID: 1746200465}
 --- !u!1 &541281576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,7 +1531,6 @@ GameObject:
   - component: {fileID: 1442048901}
   - component: {fileID: 1442048900}
   - component: {fileID: 1442048899}
-  - component: {fileID: 1442048903}
   - component: {fileID: 1442048898}
   m_Layer: 5
   m_Name: UI
@@ -1551,9 +1551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b343d55ec573c48859285aafb100c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _preparationController: {fileID: 1442048903}
+  _preparationController: {fileID: 1746200466}
   _mainMenuController: {fileID: 17782570}
-  _uiDescriptionContainer: {fileID: 0}
   _deployButton: {fileID: 2072550647}
   _previewPrefab: {fileID: 1949283632568801539, guid: be47d81b302d66a42a2879db11bb42b5, type: 3}
   _partsPreviewButtonContainer: {fileID: 1563237119}
@@ -1649,18 +1648,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1442048903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1442048897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d67ceb32a37919478a814be7d7ad0c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1563237118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1744,7 +1731,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _descriptionContainer: {fileID: 1369363027}
   _unlockButton: {fileID: 422349868}
-  _preparationController: {fileID: 1442048903}
+  _preparationController: {fileID: 1746200466}
+--- !u!1 &1746200464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1746200467}
+  - component: {fileID: 1746200466}
+  - component: {fileID: 1746200465}
+  m_Layer: 0
+  m_Name: PreparationObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1746200465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746200464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53846da23dc029944987f1f396246121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preparationsController: {fileID: 1746200466}
+  _uiPreparation: {fileID: 1442048898}
+--- !u!114 &1746200466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746200464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d67ceb32a37919478a814be7d7ad0c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _preparationData: {fileID: 1746200465}
+--- !u!4 &1746200467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746200464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1783468861
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,7 +2280,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1442048903}
+      - m_Target: {fileID: 1746200466}
         m_TargetAssemblyTypeName: PreparationsController, Assembly-CSharp
         m_MethodName: DeployButtonClick
         m_Mode: 1

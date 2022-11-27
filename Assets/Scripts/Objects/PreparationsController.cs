@@ -5,56 +5,24 @@ using UnityEngine.UI;
 
 public class PreparationsController : MonoBehaviour
 {
+    [SerializeField] private PreparationData _preparationData;
     private PlayerControls _playerControls; //Экземпрял класса input "PlayerControls"
     private RaycastHit2D _screenHit; //Точка клика по экрану
-    private static IHelicopterPart _selectedHelicopterPart;
-    private static GameObject _selectedObject; //Выбранный кликом мыши объект вертолёта
-    private static GameObject _selectedPreview; //Выбранный объект кнопки превью
-    private static int _previousId = -1;
-    private static PreparationsController _instance;
     private List<Button> PreviewButtonList;
 
-    public Action<GameObject, int>                      OnClearSelection;
+
     public Func<string, IHelicopterPart, List<Button>>  OnCreatePreviewButtons;
     public Action<bool>                                 OnUnlockingPreview;
     public Func<GameObject, GameObject, GameObject>     OnSelectObject;
     public Action<GameObject,IHelicopterPart,GameObject>OnSelectPreviewButton;
-    public Action                                  OnSwitchingMainMenu;
+    public Action                                       OnSwitchingMainMenu;
     public Action<bool>                                 OnPartWasUnlocked;
     public Action<bool>                                 OnSwitchingDescriptionContainer;
 
-    private GameObject SelectedObject
-    {
-        get { return _selectedObject; }
-        set
-        {
-            if(value == null)
-                _selectedHelicopterPart = null;
-            else
-                _selectedHelicopterPart = value.GetComponent<IHelicopterPart>();
-            _selectedObject = value;
-        }
-    }
+    public Func<GameObject>     GettingSelectedObject;
+    public Action<GameObject>   SettingSelectedObject;
+    public Action<GameObject, int>   OnClearSelection;
 
-    public static PreparationsController Instance
-    {
-        get { return _instance; }
-    }
-    public static IHelicopterPart SelectedHelicopterPart
-    {
-        get { return _selectedHelicopterPart; }
-    }
-    private GameObject SelectedPreview
-    {
-        get { return _selectedPreview; }
-        set { _selectedPreview = value; }
-    }
-    public static int SelectedObjectPrevious
-    {
-        get { return _previousId; }
-        set { _previousId = value; }
-    }
-    
     private void OnScreenClick(Vector3 mousePosition) //Вызывается при клике на экран
     {
         //Если при клике попадается коллайдер, то окрашиваем ранее выбранный объект в "стандартный" цвет, если он есть и выбираем новый объект
@@ -63,128 +31,81 @@ public class PreparationsController : MonoBehaviour
 
         if (_screenHit.collider != null)
         {
-            OnClearSelection?.Invoke(SelectedObject, 1);
-            OnClearSelection.Invoke(SelectedPreview, 2);
+            OnClearSelection?.Invoke(_preparationData.SelectedObject, 1);
+            OnClearSelection.Invoke(_preparationData.SelectedPreview, 2);
             OnSwitchingDescriptionContainer.Invoke(true);
             OnUnlockingPreview.Invoke(true);
             ResetSelectionToBoughtPart();
-            SelectedObject = OnSelectObject.Invoke(_screenHit.collider.gameObject, SelectedObject);
-            PreviewButtonList = OnCreatePreviewButtons.Invoke(SelectedHelicopterPart.Type, SelectedHelicopterPart);
+            _preparationData.SelectedObject = OnSelectObject.Invoke(_screenHit.collider.gameObject, _preparationData.SelectedObject);
+            PreviewButtonList = OnCreatePreviewButtons.Invoke(_preparationData.SelectedHelicopterPart.Type, _preparationData.SelectedHelicopterPart);
             for(int index = 0; index < PreviewButtonList.Count; index++)
             {
                 var buttonIndex = index;
                 PreviewButtonList[index].onClick.AddListener(() => OnPreviewButtonClick(buttonIndex));
-                if (Convert.ToInt32(PreviewButtonList[index].gameObject.name) == SelectedHelicopterPart.Id)
+                if (Convert.ToInt32(PreviewButtonList[index].gameObject.name) == _preparationData.SelectedHelicopterPart.Id)
                 {
-                    OnSelectPreviewButton.Invoke(PreviewButtonList[index].gameObject, SelectedHelicopterPart, SelectedPreview);
-                    SelectedPreview = PreviewButtonList[index].gameObject;
+                    OnSelectPreviewButton.Invoke(PreviewButtonList[index].gameObject, _preparationData.SelectedHelicopterPart, _preparationData.SelectedPreview);
+                    _preparationData.SelectedPreview = PreviewButtonList[index].gameObject;
                 }
             }
         }
     }
     private void OnPreviewButtonClick(int index) //Выполняется при выборе одной из частей вертолёта, что бы заменить текущую часть
     {
-        if (SelectedObjectPrevious != -1
-            && !Managers.Configuration.UnlockedObjects[SelectedHelicopterPart.Type][SelectedHelicopterPart.Id]) //Если при выборе нового объекта текущий не был куплен то возвращаем сперва конфигурацию на предыдущую
-            SelectPart(SelectedObjectPrevious);
+        if (_preparationData.SelectedObjectPrevious != -1
+            && !Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id]) //Если при выборе нового объекта текущий не был куплен то возвращаем сперва конфигурацию на предыдущую
+            SelectPart(_preparationData.SelectedObjectPrevious);
         SelectPart(index);
 
         void SelectPart(int partIndex)
         {
-            var newSelectedObject = ChangePart(partIndex);
+            var newSelectedObject = _preparationData.ChangePart(partIndex);
             if (newSelectedObject != null)
-                SelectedObject = OnSelectObject.Invoke(newSelectedObject, SelectedObject);
-            OnSelectPreviewButton.Invoke(PreviewButtonList[partIndex].gameObject,SelectedHelicopterPart,SelectedPreview);
-            SelectedPreview = PreviewButtonList[partIndex].gameObject;
+                _preparationData.SelectedObject = OnSelectObject.Invoke(newSelectedObject, _preparationData.SelectedObject);
+            OnSelectPreviewButton.Invoke(PreviewButtonList[partIndex].gameObject, _preparationData.SelectedHelicopterPart, _preparationData.SelectedPreview);
+            _preparationData.SelectedPreview = PreviewButtonList[partIndex].gameObject;
             OnSwitchingDescriptionContainer.Invoke(true);
-            OnPartWasUnlocked.Invoke(Managers.Configuration.UnlockedObjects[SelectedHelicopterPart.Type][SelectedHelicopterPart.Id]);
+            OnPartWasUnlocked.Invoke(Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id]);
         }
     }
-
-    private void DeployButtonClick() //Вызывается при клике на кнопку "Deploy" совершается переход на следующую сцену "Game"
+    public void DeployButtonClick() //Вызывается при клике на кнопку "Deploy" совершается переход на следующую сцену "Game"
     {
         Managers.Configuration.HelicopterData = Managers.Data.GetHelicopterData(Managers.GameObjects.GetObject("Player"));
         Time.timeScale = 1;
         Managers.Levels.GoToNext();
     }
-    private void UnlockButtonClick() //Вызывается при клике на кнопку unlock, для покупки новой части вертолёта
+    public void UnlockButtonClick() //Вызывается при клике на кнопку unlock, для покупки новой части вертолёта
     {
-        if(SelectedHelicopterPart.Price <= Managers.Configuration.Currency)
+        if(_preparationData.SelectedHelicopterPart.Price <= Managers.Configuration.Currency)
         {
-            Managers.Configuration.Currency -= SelectedHelicopterPart.Price;
-            Managers.Configuration.UnlockedObjects[SelectedHelicopterPart.Type][SelectedHelicopterPart.Id] = true;
-            SelectedPreview.GetComponent<PreviewButton>().RemoveLock();
+            Managers.Configuration.Currency -= _preparationData.SelectedHelicopterPart.Price;
+            Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id] = true;
+            _preparationData.SelectedPreview.GetComponent<PreviewButton>().RemoveLock();
             OnUnlockingPreview.Invoke(false);
         }
     }
     private void EscapeButtonPressed() //При нажатии кнопки Escape, выходит из выбора компонентов
     {
         ResetSelectionToBoughtPart();
-        if (SelectedObject == null)
+        if (_preparationData.SelectedObject == null)
         {
             OnSwitchingMainMenu.Invoke();
             Utils.TimeScale();
         }
-        OnClearSelection.Invoke(SelectedObject, 1);
+        OnClearSelection.Invoke(_preparationData.SelectedObject, 1);
         OnSwitchingDescriptionContainer.Invoke(false);
-        SelectedObject = null;
-    }
-    public GameObject ChangePart(int partId) //Замена запчастей вертолёта, если изменяется, UPD: возвращаемый объект на данный момент рудементарен
-    {
-        var objectId = _selectedHelicopterPart.Id;
-        if (partId != objectId)
-        {
-            SelectedObjectPrevious = objectId;
-            switch (SelectedHelicopterPart.Type)
-            {
-                case "Gun":
-                    SwitchGun(partId);
-                    break;
-                default:
-                    return SwitchObject(partId);
-            }
-        }
-        return null;
-    }
-    public GameObject TryToChangePart(IHelicopterPart partToSelect, int partId)
-    {
-        SelectedObject = partToSelect.partGameObject;
-        ChangePart(partId);
-        return SelectedObject;
-    }
-    private void SwitchGun(int id)
-    {
-        Gun newGun = Resources.Load<Gun>($"ScriptableObjects/{SelectedObject.tag}/part_{id}");
-        SelectedObject.GetComponent<GunInfo>().Gun = newGun;
-    }
-    private GameObject SwitchObject(int id)
-    {
-        IHelicopterPart helicopterPart = _selectedHelicopterPart;
-        SelectedObject.SetActive(false);
-        SelectedObject = helicopterPart.ObjectList[id].gameObject;
-        SelectedObject.SetActive(true);
-        return SelectedObject;
+        _preparationData.SelectedObject = null;
     }
     public void ResetSelectionToBoughtPart() //Метод сбрасывающий выбор компонента на предыдущий разблокированный, в случае если новый выбраный не был куплен
     {
-        if (SelectedObject != null)
+        if (_preparationData.SelectedObject != null)
         {
-            if (!Managers.Configuration.UnlockedObjects[SelectedHelicopterPart.Type][SelectedHelicopterPart.Id])
-                ChangePart(SelectedObjectPrevious);
+            if (!Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id])
+                _preparationData.ChangePart(_preparationData.SelectedObjectPrevious);
         }
-    }
-    public void ClearSelection(GameObject selectedPart)
-    {
-        OnClearSelection.Invoke(selectedPart, 1);
-    }
-    private void SetInstance()
-    {
-        if (_instance == null)
-            _instance = this;
     }
     private void Awake()
     {
-        SetInstance();
         _playerControls = new PlayerControls();
     }
     private void OnEnable()

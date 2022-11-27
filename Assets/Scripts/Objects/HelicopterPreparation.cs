@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class HelicopterPreparation : MonoBehaviour
 {
+    private GameObject SetHelicopterGameObject()
+    {
+        return this.gameObject;
+    }
+
     void Start()
     {
-        Managers.Configuration.SetHelicopterGameObject(this.gameObject);
         switch (Managers.Levels.SceneId())
         {
             case 2:
@@ -12,10 +16,21 @@ public class HelicopterPreparation : MonoBehaviour
                                             this.transform.position.y, this.transform.position.z); //Устанавливаем позицию сверху слева, в зависимости от размера экрана
                 break;
             case 3:
+                Managers.Configuration.LoadHelicopterData();
                 var heightBottom = -1 * Camera.main.orthographicSize + this.gameObject.transform.localScale.x;
                 this.transform.position = new Vector3(0, heightBottom, 0);
                 break;
         }
 
+    }
+
+    private void OnEnable()
+    {
+        Managers.Configuration.OnSettingHelicopterGameObject += SetHelicopterGameObject;
+    }
+
+    private void OnDisable()
+    {
+        Managers.Configuration.OnSettingHelicopterGameObject -= SetHelicopterGameObject;
     }
 }

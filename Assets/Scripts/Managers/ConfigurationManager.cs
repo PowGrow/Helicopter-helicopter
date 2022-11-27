@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,29 +8,29 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status { get; private set; }
 
-    //Поле текущего количество валюты игрока
-    private int _currency;
-
+    private int _currency; //Поле текущего количество валюты игрока
     private Dictionary<string, List<bool>> _unlockedObjects = new Dictionary<string, List<bool>>(3); //3 - количество деталей вертолёта: Cabin,Gun,Wing
-    private GameObject _helicopterObject;
-    private List<KeyValuePair<string, int>> _helicopterData = new List<KeyValuePair<string, int>>();
+    private List<KeyValuePair<string, int>> _helicopterData = new List<KeyValuePair<string, int>>(); //Список установленных частей вертолёта (IHelicopterPart.Type,IHelicopterPart.Id)
+
+    public Func<GameObject> OnSettingHelicopterGameObject;
+    public Action<GameObject, int> OnClearSelection;
+    public GameObject HelicopterObject
+    {
+        get 
+        {
+            return OnSettingHelicopterGameObject.Invoke();
+        }
+    }
     public Dictionary<string, List<bool>> UnlockedObjects
     {
         get { return _unlockedObjects; }
         set { _unlockedObjects = value; }
     }
-    public GameObject HelicopterObject
-    {
-        get { return _helicopterObject; }
-    }
-
     public List<KeyValuePair<string, int>> HelicopterData
     {
         get { return _helicopterData; }
         set { _helicopterData = value; }
     }
-
-    //Публичное свойство для получения и установления количества валюты
     public int Currency
     {
         get { return _currency; }
@@ -48,13 +49,11 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
         Initialize();
         status = ManagerStatus.Started;
     }
-
     private void Initialize()
     {
         Currency = 200;
         DefaultConfiguration();
     }
-
     public void DefaultConfiguration() //Инициализация пустой конфигурации при старте новой игре.
     {
         _helicopterData.Clear();
@@ -65,33 +64,20 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
         foreach(var item in _unlockedObjects)
             item.Value[0] = true;
     }
-
-    public void SetHelicopterGameObject(GameObject helicopterObject)
+    public void LoadHelicopterData()
     {
-        _helicopterObject = helicopterObject;
-        if (HelicopterData.Count != 0)
-            LoadHelicopterData(HelicopterData);
-    }
-
-    public void LoadHelicopterData(List<KeyValuePair<string, int>> helicopterData)
-    {
-        var helicopterParts = _helicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
-        PreparationsController.Instance.TryToChangePart(helicopterParts[0], helicopterData[0].Value);
-        PreparationsController.Instance.TryToChangePart(helicopterParts[1], helicopterData[1].Value);
-        helicopterParts = _helicopterObject.GetComponentsInChildren<IHelicopterPart>().ToList();
-        helicopterData.Reverse();
+        PreparationData _preparationData = new PreparationData();
+        var helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
+        _preparationData.TryToChangePart(helicopterParts[0], _helicopterData[0].Value);
+        _preparationData.TryToChangePart(helicopterParts[1], _helicopterData[1].Value);
+        helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().ToList();
+        _helicopterData.Reverse();
         GameObject lastSelectedGameObject = null;
-        for(int partIndex = 0; partIndex < helicopterParts.Count; partIndex++)
+        for (int partIndex = 0; partIndex < helicopterParts.Count; partIndex++)
         {
             if (helicopterParts[partIndex].Type == "Gun")
-            {
-                lastSelectedGameObject = PreparationsController.Instance.TryToChangePart(helicopterParts[partIndex], helicopterData[partIndex].Value);
-            }
-
+                lastSelectedGameObject = _preparationData.TryToChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
         }
-        if(Managers.Levels.SceneId() == 2)
-            PreparationsController.Instance.ClearSelection(lastSelectedGameObject);
+        OnClearSelection?.Invoke(lastSelectedGameObject, 1);
     }
-
-
 }

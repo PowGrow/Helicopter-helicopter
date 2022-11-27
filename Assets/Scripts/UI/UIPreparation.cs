@@ -127,6 +127,7 @@ public class UIPreparation : MonoBehaviour
     }
     private void OnEnable()
     {
+        Managers.Configuration.OnClearSelection += ClearSelection;
         _preparationController.OnClearSelection += ClearSelection;
         _preparationController.OnCreatePreviewButtons += CreatePreviewButtons;
         _preparationController.OnSelectObject += SelectObject;
@@ -136,6 +137,7 @@ public class UIPreparation : MonoBehaviour
     }
     private void OnDisable()
     {
+        Managers.Configuration.OnClearSelection -= ClearSelection;
         _preparationController.OnClearSelection -= ClearSelection;
         _preparationController.OnCreatePreviewButtons -= CreatePreviewButtons;
         _preparationController.OnSelectObject -= SelectObject;
