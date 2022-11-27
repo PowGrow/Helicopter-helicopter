@@ -3,12 +3,7 @@ using UnityEngine;
 public class UIDescriptionContainer : MonoBehaviour
 {
     [SerializeField] private GameObject _unlockButton;
-    private UIDescriptionContainer _uiDescriptionContainer;
-
-    public UIDescriptionContainer UiDescriptionContainer
-    {
-        get { return _uiDescriptionContainer; }
-    }
+    [SerializeField] private PreparationsController _preparationController;
 
     public GameObject GameObject
     {
@@ -22,13 +17,18 @@ public class UIDescriptionContainer : MonoBehaviour
         { _unlockButton.SetActive(value); }
     }
 
-    private void ChangeUnlockButtonState()
+    private void SetUnlockButtonState(bool state)
     {
-
+        _unlockButton.SetActive(state);
     }
 
     private void OnEnable()
     {
-        _uiDescriptionContainer = GetComponent<UIDescriptionContainer>();
+        _preparationController.OnUnlockingPreview += SetUnlockButtonState;
+    }
+
+    private void OnDisable()
+    {
+        _preparationController.OnUnlockingPreview -= SetUnlockButtonState;
     }
 }

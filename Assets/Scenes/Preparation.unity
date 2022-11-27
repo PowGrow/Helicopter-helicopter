@@ -1532,6 +1532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unlockButton: {fileID: 422349868}
+  _preparationController: {fileID: 1442048903}
 --- !u!1 &1442048897
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,8 +1545,8 @@ GameObject:
   - component: {fileID: 1442048901}
   - component: {fileID: 1442048900}
   - component: {fileID: 1442048899}
-  - component: {fileID: 1442048898}
   - component: {fileID: 1442048903}
+  - component: {fileID: 1442048898}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1565,6 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b343d55ec573c48859285aafb100c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _preparationController: {fileID: 1442048903}
   _uiDescriptionContainer: {fileID: 1369363031}
   _mainMenuObject: {fileID: 17782568}
   _deployButton: {fileID: 2072550647}
