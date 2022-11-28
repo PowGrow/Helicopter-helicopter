@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -335,7 +336,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.8344045
+  orthographic size: 4.88
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -366,6 +367,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94ea8e7fd40a3948bc52077896bf6c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &678658685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1285,7 @@ MonoBehaviour:
   idDirecetion: 1
   _rb: {fileID: 0}
   basePosition: {x: 0, y: 0, z: 0}
+  endlessPosition: {x: 0, y: 0, z: 0}
 --- !u!50 &1600089666
 Rigidbody2D:
   serializedVersion: 4
@@ -1322,10 +1336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb62683c315161d4e8f2d871277aab54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countEnemy: 50
+  countEnemy: 51
   cameraSize: 12
   moveDownYposition: 1.2
-  waweOfEnemiesCount: 6
+  waweOfEnemiesCount: 8
   lineOfEnemies: 0
   curentLineEnemiesCount: 0
   prefabList:
@@ -1491,17 +1505,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Droid_Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.12
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.01
+      value: -5.742
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1607,7 +1625,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1876,11 +1894,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.87
+      value: -13.26
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.98
+      value: -0.26
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_LocalPosition.z

@@ -15,7 +15,7 @@ public class SpawnEnemies : MonoBehaviour
     [SerializeField] public List<List<GameObject>> enemyList = new List<List<GameObject>>();
     void Start()
     {
-
+        Camera.main.orthographicSize /= ((float)Screen.width / (float)Screen.height)/(float)(16f / 9f)  ;
         for (int i = 0; i <= countEnemy; i += waweOfEnemiesCount)
         {
             if (countEnemy - i < waweOfEnemiesCount)
@@ -49,7 +49,8 @@ public class SpawnEnemies : MonoBehaviour
             int selectEnemy = Random.Range(0, prefabList.Count);
             GameObject obj = Instantiate(prefabList[selectEnemy]);
             enemiesWawe.Add(obj);
-            obj.transform.position = new Vector3(transform.position.x + i * cameraSize / count + cameraSize / count - 1, transform.position.y + line+(moveDownYposition-1)*line, transform.position.z);
+            obj.transform.position = new Vector3(Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / (count*1.5f)*(i+0.5f), Screen.height, Camera.main.nearClipPlane)).x, transform.position.y + line + (moveDownYposition - 1) * line, transform.position.z);
+           // obj.transform.position = new Vector3(transform.position.x + i * cameraSize / count + cameraSize / count - 1, transform.position.y + line+(moveDownYposition-1)*line, transform.position.z);
         }
         enemyList.Add(enemiesWawe);
     }

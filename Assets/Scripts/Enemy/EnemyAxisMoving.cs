@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAxisMoving : MonoBehaviour
+public class EnemyAxisMoving : DroidEnemy
 { 
     [SerializeField]public Vector3 _movementDirection;
     [SerializeField]private float _speed = 15f;
@@ -39,9 +39,9 @@ public class EnemyAxisMoving : MonoBehaviour
     {
 
         Gizmos.color = Color.yellow;
-        Vector3 _gizmosDrawLeft = new Vector3(transform.position.x- _movementDirection.x, _movementDirection.y, _movementDirection.z);
+        Vector3 _gizmosDrawLeft = new Vector3(basePosition.x- _movementDirection.x, _movementDirection.y, _movementDirection.z);
         Gizmos.DrawWireCube(_gizmosDrawLeft, new Vector3(1, 1, 1));
-        Vector3 _gizmosDraw = new Vector3(transform.position.x + _movementDirection.x, _movementDirection.y, _movementDirection.z);
+        Vector3 _gizmosDraw = new Vector3(basePosition.x + _movementDirection.x, _movementDirection.y, _movementDirection.z);
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(_gizmosDraw, new Vector3(1, 1, 1));
     }
