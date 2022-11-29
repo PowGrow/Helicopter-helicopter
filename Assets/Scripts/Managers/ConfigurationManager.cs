@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ConfigurationManager : MonoBehaviour, IGameManager
 {
@@ -39,9 +38,9 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
         set
         {
             _currency = value;
-            var sceneId = SceneManager.GetActiveScene().buildIndex;
+            var sceneId = Managers.Levels.SceneId();
             if (sceneId != 0 && sceneId != 1)
-                OnCurrencyChanged.Invoke();
+                OnCurrencyChanged?.Invoke();
         }
     }
 

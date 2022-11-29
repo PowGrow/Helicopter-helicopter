@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3944547518975744942}
   - component: {fileID: 5886156065206971360}
   - component: {fileID: 5684748669392371352}
+  - component: {fileID: 5600913185820870169}
   - component: {fileID: 2083268459358731048}
   m_Layer: 0
   m_Name: DroidEnemy
@@ -152,6 +153,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gun: {fileID: 11400000, guid: 5c627fd22b381bc4fa5adffc3ed47651, type: 2}
   _shootingPoint: {fileID: 4386231976968463616}
+--- !u!114 &5600913185820870169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076837837885025295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66a507526d3a34f4ab2286602a26971c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currencyGearPrefab: {fileID: 3129126148552962308, guid: da6401c1a879f194982c4cbc0bbbaf15, type: 3}
 --- !u!61 &2083268459358731048
 BoxCollider2D:
   m_ObjectHideFlags: 0
