@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: gunner_enemy_idle
+  m_Name: heavygunner_enemy_idle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -35,7 +35,7 @@ AnimationClip:
       value: {fileID: 21300000, guid: 4df006efb7f500b4695f4e96078ce0f0, type: 3}
     - time: 1.1666666
       value: {fileID: 21300000, guid: 37554745ea3163d45841d73989adb80d, type: 3}
-    - time: 1.3166667
+    - time: 1.3333334
       value: {fileID: 21300000, guid: e2a4d5d1a54a9a643a6fe5c9022fad9d, type: 3}
     attribute: m_Sprite
     path: 
@@ -70,7 +70,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.3333334
+    m_StopTime: 1.35
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

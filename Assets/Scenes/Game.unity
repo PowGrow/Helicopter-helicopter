@@ -222,6 +222,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Droid_Enemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -736,6 +740,26 @@ PrefabInstance:
     - target: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_Name
       value: Droid_Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083268459358731048, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190380531072151979, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886156065206971360, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_RootOrder
@@ -1623,6 +1647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Droid_Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1076837837885025295, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2105,6 +2133,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Droid_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5886156065206971360, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
+      propertyPath: _shootingTargetLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 8386094559812645610, guid: 88ca156e2c6537d4daf128e3f6c31561, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2162,6 +2194,10 @@ PrefabInstance:
     - target: {fileID: 570677085008840254, guid: b3b3389e7bd9fd3499002eaa8f600d3c, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1117761379860824651, guid: b3b3389e7bd9fd3499002eaa8f600d3c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1204995586548475266, guid: b3b3389e7bd9fd3499002eaa8f600d3c, type: 3}
       propertyPath: m_Layer

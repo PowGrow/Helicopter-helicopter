@@ -20,7 +20,6 @@ public class EnemyAxisFollowing : EnemyBase
     }
     void MoveByAxis()
     {
-        Debug.Log(idDirecetion);
         movementDirection = new Vector3(player.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z);
         if (!(Mathf.Abs(transform.position.x - player.transform.position.x) < 0.03f))
         {

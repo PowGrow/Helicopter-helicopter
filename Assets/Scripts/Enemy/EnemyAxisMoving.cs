@@ -22,7 +22,6 @@ public class EnemyAxisMoving : EnemyBase
     }
     void MoveByAxis()
     {
-        Debug.Log(idDirecetion);
         Vector3 direction = (movementDirection - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
         if (idDirecetion == 1 && transform.position.x < movementDirection.x)

@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
         _currentHealth -= value - (value / 10 * Armor);
         Messenger.Broadcast(GameEvent.PLAYER_HEALTH_UPDATED);
         if (_currentHealth < 0)
-            Die();
+            Time.timeScale = 0;
     }
 
     private void Die()
