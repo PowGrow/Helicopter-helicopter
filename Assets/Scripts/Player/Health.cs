@@ -1,4 +1,4 @@
-using System.Linq;
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -7,15 +7,26 @@ public class Health : MonoBehaviour
     private float _currentHealth = 1f;
     private float _armor = 0f;
 
+    public Action OnHealthUpdated;
+
     public float MaxHealth
     {
         get { return maxHealth; }
-        set { maxHealth = value; }
+        set 
+        { 
+            maxHealth = value;
+            CurrentHealth = value;
+        }
     }
 
     public float CurrentHealth
     {
         get { return _currentHealth; }
+        private set 
+        { 
+            _currentHealth = value;
+            OnHealthUpdated?.Invoke();
+        }
     }
 
     public float Armor
@@ -27,7 +38,7 @@ public class Health : MonoBehaviour
     public void GetDamage(float value)
     {
         _currentHealth -= value - (value / 10 * Armor);
-        Messenger.Broadcast(GameEvent.PLAYER_HEALTH_UPDATED);
+        
         if (_currentHealth < 0)
             Time.timeScale = 0;
     }

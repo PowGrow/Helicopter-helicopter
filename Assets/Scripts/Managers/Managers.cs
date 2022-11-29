@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,10 @@ public class Managers : MonoBehaviour
     }
     public static GameObjectManager GameObjects { get; private set; }
     public static LevelManager Levels { get; private set; }
-
     public static DataManager Data { get; private set; }
-
     public static ConfigurationManager Configuration { get; private set; }
+
+    public Action ManagersWasStarted;
 
     private List<IGameManager> _startSequence;
     private static Managers _instance;
@@ -72,12 +73,11 @@ public class Managers : MonoBehaviour
             if (numReady > lastReady)
             {
                 Debug.Log("Progress: " + numReady + " / " + numModules);
-                //Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS, numReady, numModules);
             }
             yield return null;
         }
         Debug.Log("All managers started up");
-        Messenger.Broadcast(StartupEvent.MANAGERS_STARTED);
+        ManagersWasStarted?.Invoke();
     }
 
     public GameObject GetObject()

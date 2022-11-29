@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,7 +6,7 @@ public class UIHealth : MonoBehaviour
 {
     private Health _health;
     private TextMeshProUGUI _healthLabel;
-    
+
     private void UpdateHealth()
     {
         var text = _health.CurrentHealth;
@@ -21,11 +22,11 @@ public class UIHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        Messenger.AddListener(GameEvent.PLAYER_HEALTH_UPDATED, UpdateHealth);
+        _health.OnHealthUpdated += UpdateHealth;
     }
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(GameEvent.PLAYER_HEALTH_UPDATED, UpdateHealth);
+        _health.OnHealthUpdated -= UpdateHealth;
     }
 }

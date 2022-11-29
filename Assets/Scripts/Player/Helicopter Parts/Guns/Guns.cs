@@ -22,14 +22,12 @@ public class Guns : MonoBehaviour, IShooter
     {
         get { return _gunInfoList; }
     }
-    //Фассадирующий метод стрельбы
+
     public void Fire()
     {
         TryToShootBullet(this);
     }
-
-    //Пытаемся выстрелить, если успешно, то устанавливаем снаряду модификатор скорости и силы, в зависимости от имеющихся бафов
-    private void TryToShootBullet(Guns guns)
+    private void TryToShootBullet(Guns guns)    //Пытаемся выстрелить, если успешно, то устанавливаем снаряду модификатор скорости и силы, в зависимости от имеющихся бафов
     {
         for (int currentGunIndex = 0; currentGunIndex < _gunsGameObjectList.Count; currentGunIndex++)
         {
@@ -46,9 +44,7 @@ public class Guns : MonoBehaviour, IShooter
             }
         }
     }
-
-    //Устанавливаем все пушки на нужные места в зависимости от их количества
-    public void SetupGunMountPoints(int gunsSummCount, List<Vector2> wingsMountPoints)
+    public void SetupGunMountPoints(int gunsSummCount, List<Vector2> wingsMountPoints)    //Устанавливаем все пушки на нужные места в зависимости от их количества
     {
         //Сначала отключаем все пушки
         foreach(GameObject gun in _gunsGameObjectList)
@@ -65,16 +61,7 @@ public class Guns : MonoBehaviour, IShooter
             }
         }
     }
-
-    //Заменяем пушку на новую в зависимости от её типа
-    public void SwapGun(int gunId, Gun gun)
-    {
-        var gunInfo = _gunsGameObjectList[gunId].GetComponent<GunInfo>();
-        Messenger.Broadcast(GameEvent.CONFIGURATION_CHANGED);
-    }
-
-    //Загружает информацию о пушках при старте
-    private void LoadGunInfo()
+    private void LoadGunInfo()    //Загружает информацию о пушках при старте
     {
         _gunInfoList.Clear();
         for(int gunIndex = 0; gunIndex < _gunsGameObjectList.Count; gunIndex++)
@@ -86,8 +73,6 @@ public class Guns : MonoBehaviour, IShooter
                 _gunInfoList.Add(gunInfo);
         }
     }
-    
-
     private void SetInstance()
     {
         if (_instance == null)
@@ -98,7 +83,6 @@ public class Guns : MonoBehaviour, IShooter
     {
         SetInstance();
     }
-
     private void Start()
     {
         LoadGunInfo();

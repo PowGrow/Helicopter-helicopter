@@ -1,15 +1,22 @@
 using UnityEngine;
 
-public class SceneChanger : MonoBehaviour
+public class GameInitializer : MonoBehaviour
 {
+    private Managers _managers;
+
     private void Awake()
     {
-        Messenger.AddListener(StartupEvent.MANAGERS_STARTED, ChangeScene);
+        _managers = Managers.Instances;
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        Messenger.RemoveListener(StartupEvent.MANAGERS_STARTED, ChangeScene);
+        _managers.ManagersWasStarted += ChangeScene;
+    }
+
+    private void OnDisable()
+    {
+        _managers.ManagersWasStarted -= ChangeScene;
     }
 
     private void ChangeScene()
