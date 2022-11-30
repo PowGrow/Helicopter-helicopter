@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyAxisFollowing : EnemyBase
+public class EnemyAxisFollowing : MonoBehaviour
 {
     public GameObject player;
     public Vector3 movementDirection;
@@ -8,14 +8,11 @@ public class EnemyAxisFollowing : EnemyBase
     public int idDirecetion;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = Managers.GameObjects.GetObject("Player");
         movementDirection = new Vector3(player.transform.position.x,this.gameObject.transform.position.y, this.gameObject.transform.position.z);
     }
-
-    // Update is called once per frame
     void Update()
     {
-
         MoveByAxis();
     }
     void MoveByAxis()
@@ -30,12 +27,5 @@ public class EnemyAxisFollowing : EnemyBase
         {
             Vector3 direction = new Vector3(0, 0, 0);
         }
-        
-       
-        
-    }
-    void OnDrawGizmosSelected()
-    {
-
     }
 }

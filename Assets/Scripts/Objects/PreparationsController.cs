@@ -30,8 +30,8 @@ public class PreparationsController : MonoBehaviour
         {
             OnClearSelection?.Invoke(_preparationData.SelectedObject, 1);
             OnClearSelection.Invoke(_preparationData.SelectedPreview, 2);
-            OnSwitchingDescriptionContainer.Invoke(true);
-            OnUnlockingPreview.Invoke(true);
+            OnSwitchingDescriptionContainer?.Invoke(true);
+            OnUnlockingPreview?.Invoke(true);
             ResetSelectionToBoughtPart();
             _preparationData.SelectedObject = OnSelectObject.Invoke(_screenHit.collider.gameObject, _preparationData.SelectedObject);
             PreviewButtonList = OnCreatePreviewButtons.Invoke(_preparationData.SelectedHelicopterPart.Type, _preparationData.SelectedHelicopterPart);

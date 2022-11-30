@@ -13,6 +13,7 @@ public class EnemyGun : MonoBehaviour, IShooter
             var bullet = Instantiate(_gun.ProjectilePrefab);
             Managers.GameObjects.Projectiles.Last().DamageMultiplier = _gun.DamageMultiplier;
             bullet.tag = this.tag;
+            bullet.layer = 11; // 11 - EnemyProjectiles
             bullet.transform.SetPositionAndRotation(_shootingPoint.position, _shootingPoint.rotation);
             _timer = 0;
         }

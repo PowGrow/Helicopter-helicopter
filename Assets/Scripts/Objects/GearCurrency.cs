@@ -18,10 +18,17 @@ public class GearCurrency : MonoBehaviour
             _spriteRenderer.sprite = _currencyObject.Sprite;
         }
     }
+
+    private IEnumerator DestroyByTime(float value)
+    {
+        yield return new WaitForSeconds(value);
+        Destroy(this.gameObject);
+    }
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        DestroyByTime(10);
     }
     private void FixedUpdate()
     {

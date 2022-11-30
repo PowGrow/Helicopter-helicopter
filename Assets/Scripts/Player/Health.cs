@@ -1,7 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IHealth
 {
     [SerializeField] private float maxHealth = 100f;
     private float _currentHealth = 1f;
@@ -37,8 +38,7 @@ public class Health : MonoBehaviour
 
     public void GetDamage(float value)
     {
-        _currentHealth -= value - (value / 10 * Armor);
-        
+        CurrentHealth -= value - (value / 10 * Armor);
         if (_currentHealth < 0)
             Time.timeScale = 0;
     }
@@ -47,4 +47,5 @@ public class Health : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
 }

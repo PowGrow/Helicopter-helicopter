@@ -6,8 +6,8 @@ public class Bullet : Projectile, IProjectile
     //При соприкосновении снаряда с врагом взрывается и наности урон врагу
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IEnemy enemy = collision.transform.GetComponent<IEnemy>();
-        enemy.GetDamage((damage * DamageMultiplier) * DamageModificator);
+        IHealth collisionHealth = collision.attachedRigidbody.GetComponent<IHealth>();
+        collisionHealth.GetDamage((damage * DamageMultiplier) * DamageModificator);
         Destroy(this.gameObject);
     }
     

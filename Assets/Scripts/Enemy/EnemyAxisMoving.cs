@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class EnemyAxisMoving : EnemyBase
+public class EnemyAxisMoving : MonoBehaviour
 {
-    public GameObject player;
     public Vector3 firstDirection;
     public Vector3 secondDirection;
     public Vector3 movementDirection;
@@ -10,14 +9,12 @@ public class EnemyAxisMoving : EnemyBase
     public int idDirecetion;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         movementDirection = firstDirection;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         MoveByAxis();
     }
     void MoveByAxis()

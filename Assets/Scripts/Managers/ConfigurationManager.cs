@@ -52,11 +52,12 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
     }
     private void Initialize()
     {
-        Currency = 200;
+        Currency = 200; // HESOYAM like
         DefaultConfiguration();
     }
     public void DefaultConfiguration() //Инициализация пустой конфигурации при старте новой игре.
     {
+        Currency = 0;
         _helicopterData.Clear();
         _unlockedObjects.Clear();
         _unlockedObjects.Add("Cabin", new List<bool>(Enumerable.Repeat(false,4).ToList()));

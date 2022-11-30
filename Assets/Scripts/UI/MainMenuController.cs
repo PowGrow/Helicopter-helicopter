@@ -19,7 +19,8 @@ public class MainMenuController : MonoBehaviour
 
     public void OnContinueButtonClick() //Загружаем игру
     {
-        Utils.TimeScale();
+        if(Managers.Levels.SceneId() != 1)
+            Utils.TimeScale();
         Managers.Data.LoadGameState();
         Managers.Levels.GoToNext();
     }

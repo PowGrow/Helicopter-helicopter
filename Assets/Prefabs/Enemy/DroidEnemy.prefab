@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 8386094559812645610}
   - component: {fileID: 1808001909483090257}
   - component: {fileID: 3516477645448039832}
-  - component: {fileID: 3944547518975744942}
   - component: {fileID: 5886156065206971360}
   - component: {fileID: 5684748669392371352}
+  - component: {fileID: 3246075293142949186}
   - component: {fileID: 5600913185820870169}
   - component: {fileID: 2083268459358731048}
+  - component: {fileID: 611970467317026722}
   m_Layer: 0
   m_Name: DroidEnemy
   m_TagString: Enemy
@@ -111,18 +112,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3944547518975744942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1076837837885025295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c6c01767dd6cf4995e6cd80df00e09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5886156065206971360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +142,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gun: {fileID: 11400000, guid: 5c627fd22b381bc4fa5adffc3ed47651, type: 2}
   _shootingPoint: {fileID: 4386231976968463616}
+--- !u!114 &3246075293142949186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076837837885025295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc4bde81e76f8140be05c97ea05f8b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!114 &5600913185820870169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,6 +194,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.83481836, y: 0.72387743}
   m_EdgeRadius: 0
+--- !u!50 &611970467317026722
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076837837885025295}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3190380531072151979
 GameObject:
   m_ObjectHideFlags: 0

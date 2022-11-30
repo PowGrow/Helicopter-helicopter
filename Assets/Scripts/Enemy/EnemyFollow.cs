@@ -1,13 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyFollow : EnemyBase
+public class EnemyFollow : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
     [SerializeField] private float _offset;
     [SerializeField] private float _speed = 1;
 
-    private Health _playerHealth;
+    private IHealth _playerHealth;
+    private IHealth _health;
 
     void EnemyMove()//Движкние к игроку
     {
@@ -34,14 +35,15 @@ public class EnemyFollow : EnemyBase
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //пока не доделано
-        GetDamage(100);
+        _health.GetDamage(100);
         _playerHealth.GetDamage(10);
     }
 
     void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
-        _playerHealth = _player.GetComponent<Health>();
+        _health = GetComponent<IHealth>();
+        _player = Managers.GameObjects.GetObject("Player");
+        _playerHealth = _player.GetComponent<IHealth>();
     }
     private void OnEnable()
     {

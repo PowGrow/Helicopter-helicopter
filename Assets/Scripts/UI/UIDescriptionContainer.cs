@@ -3,12 +3,12 @@ using UnityEngine;
 public class UIDescriptionContainer : MonoBehaviour
 {
     [SerializeField] private GameObject _descriptionContainer;
-    [SerializeField] private GameObject _unlockButton;
+    [SerializeField] private GameObject _unlockContrainer;
     [SerializeField] private PreparationsController _preparationController;
 
     private void SetUnlockButtonState(bool state)
     {
-        _unlockButton.SetActive(!state);
+        _unlockContrainer.SetActive(!state);
     }
 
     private void SwitchDescriptionContainer(bool state)

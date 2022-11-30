@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AutoAimMissile : Projectile
@@ -22,8 +20,8 @@ public class AutoAimMissile : Projectile
     //При соприкосновении ракеты с врагом взрывается и наности урон врагу
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        IEnemy enemy = collision.transform.GetComponent<IEnemy>();
-        enemy.GetDamage((damage * DamageMultiplier) * DamageModificator);
+        IHealth collisionHealth = collision.transform.GetComponent<IHealth>();
+        collisionHealth.GetDamage((damage * DamageMultiplier) * DamageModificator);
         Destroy(this.gameObject);
     }
 
