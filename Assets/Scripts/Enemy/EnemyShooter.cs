@@ -17,7 +17,7 @@ public class EnemyShooter : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _direction = (Vector2)transform.TransformDirection(Vector2.down);
+        _direction = (Vector2)transform.TransformDirection(Vector2.up);
         _rayCastHit2D = Physics2D.Raycast((Vector2)_shootingPoint.position, _direction, Mathf.Infinity, _filter.layerMask);
         if (_rayCastHit2D.collider != null)
             _enemyGun.Fire();

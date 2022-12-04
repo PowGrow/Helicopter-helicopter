@@ -1277,6 +1277,7 @@ GameObject:
   - component: {fileID: 8145655175564461480}
   - component: {fileID: 8145655175564461462}
   - component: {fileID: 9046433813591585314}
+  - component: {fileID: 5597160330289449420}
   m_Layer: 8
   m_Name: Helicopter
   m_TagString: Player
@@ -1387,6 +1388,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 397e17d772b219a429171b67f00428b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5597160330289449420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8145655175564461486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d035225f448a24db54e58c032e4a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8145655176075270297

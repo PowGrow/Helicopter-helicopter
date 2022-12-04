@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     [SerializeField] private float maxHealth = 100f;
     private float _currentHealth = 1f;
     private SpriteRenderer _spriteRenderer;
+
+    public Action<EnemyBehavior> OnHealthLowered;
 
     public float MaxHealth
     {
@@ -29,9 +32,19 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void GetDamage(float value)
     {
         _currentHealth -= value;
-        StartCoroutine(BlinkDamage());
-        if (_currentHealth < 0)
+        CheckCurrentBehavior(_currentHealth);
+        if (_currentHealth <= 0)
             Die();
+        else
+            StartCoroutine(BlinkDamage());
+    }
+
+    private void CheckCurrentBehavior(float health)
+    {
+        if (health < 25)
+            OnHealthLowered?.Invoke(EnemyBehavior.defensive);
+        else if (health < 50)
+            OnHealthLowered?.Invoke(EnemyBehavior.careful);
     }
 
     private IEnumerator BlinkDamage()

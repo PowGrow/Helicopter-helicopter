@@ -18,7 +18,7 @@ public class CurrencyDrop : MonoBehaviour
         return currencyId;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         var currencyObject = Instantiate(_currencyGearPrefab);
         currencyObject.transform.position = this.transform.position;

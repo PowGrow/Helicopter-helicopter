@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     private void Move()
     {
         Vector2 movement = new Vector2(_deltaX, _deltaY);
-        _body.velocity = Vector2.ClampMagnitude(movement * _speed, 5f);
+        _body.velocity = Vector2.ClampMagnitude(movement * _speed, 10f);
     }
 
     private void Update()
