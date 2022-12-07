@@ -20,6 +20,7 @@ public class CurrencyDrop : MonoBehaviour
 
     private void OnDisable()
     {
+        if (!this.gameObject.scene.isLoaded) return;
         var currencyObject = Instantiate(_currencyGearPrefab);
         currencyObject.transform.position = this.transform.position;
         var currencyId = GenerateRandom();

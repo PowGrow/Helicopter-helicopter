@@ -18,21 +18,16 @@ public class GearCurrency : MonoBehaviour
             _spriteRenderer.sprite = _currencyObject.Sprite;
         }
     }
-
-    private IEnumerator DestroyByTime(float value)
-    {
-        yield return new WaitForSeconds(value);
-        Destroy(this.gameObject);
-    }
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
-        DestroyByTime(10);
     }
     private void FixedUpdate()
     {
-        _rigidBody.velocity = Vector2.down;  
+        _rigidBody.velocity = Vector2.down;
+        if (this.transform.position.y < -1 * (Border.GetBorder("vertical") + 1f))
+            Destroy(this.gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

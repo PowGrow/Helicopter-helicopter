@@ -29,8 +29,12 @@ public class LevelManager : MonoBehaviour,IGameManager
 
     public void GoToNext()
     {
-        int _currentBuildIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(++_currentBuildIndex);
+        SceneManager.LoadScene(SceneId() + 1);
+    }
+
+    public void GoToPrevious()
+    {
+        SceneManager.LoadScene(SceneId() - 1);
     }
 
     public void GoTo(int sceneBuildIndex)

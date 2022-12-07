@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Health : MonoBehaviour, IHealth
 {
     [SerializeField] private float maxHealth = 100f;
+    [SerializeField] private TextMeshProUGUI _deathLabel;
     private float _currentHealth = 1f;
     private float _armor = 0f;
 
@@ -24,8 +26,10 @@ public class Health : MonoBehaviour, IHealth
     {
         get { return _currentHealth; }
         private set 
-        { 
+        {
             _currentHealth = value;
+            if (_currentHealth <= 0)
+                _currentHealth = 0;
             OnHealthUpdated?.Invoke();
         }
     }
@@ -39,13 +43,17 @@ public class Health : MonoBehaviour, IHealth
     public void GetDamage(float value)
     {
         CurrentHealth -= value - (value / 10 * Armor);
-        if (_currentHealth < 0)
-            Time.timeScale = 0;
+        if (_currentHealth <= 0)
+            StartCoroutine(Die());
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
-        Destroy(this.gameObject);
+        _deathLabel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3);
+        _deathLabel.gameObject.SetActive(false);
+        _deathLabel.fontSize = 1;
+        Managers.Levels.GoToPrevious();
     }
 
 }

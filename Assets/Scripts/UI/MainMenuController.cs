@@ -41,7 +41,7 @@ public class MainMenuController : MonoBehaviour
     {
         Managers.Data.SaveGameState();
         Utils.TimeScale();
-        OnGameSaved.Invoke();
+        OnGameSaved?.Invoke();
         this.gameObject.SetActive(false);
     }
 

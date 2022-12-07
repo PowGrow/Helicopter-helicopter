@@ -1,6 +1,6 @@
 public enum EnemyBehavior
 {
-    active = 1,
+    active = 0,
+    careful = 1,
     defensive = 2,
-    careful = 3,
 }

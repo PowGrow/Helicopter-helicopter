@@ -8,8 +8,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private float _currentHealth = 1f;
     private SpriteRenderer _spriteRenderer;
 
-    public Action<EnemyBehavior> OnHealthLowered;
-
+    public Action<float> OnHealthCnaged;
+    public Action<GameObject> OnEnemyDying;
     public float MaxHealth
     {
         get { return maxHealth; }
@@ -32,19 +32,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void GetDamage(float value)
     {
         _currentHealth -= value;
-        CheckCurrentBehavior(_currentHealth);
+        OnHealthCnaged?.Invoke(_currentHealth);
         if (_currentHealth <= 0)
             Die();
         else
             StartCoroutine(BlinkDamage());
-    }
-
-    private void CheckCurrentBehavior(float health)
-    {
-        if (health < 25)
-            OnHealthLowered?.Invoke(EnemyBehavior.defensive);
-        else if (health < 50)
-            OnHealthLowered?.Invoke(EnemyBehavior.careful);
     }
 
     private IEnumerator BlinkDamage()
@@ -56,6 +48,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     private void Die()
     {
+        OnEnemyDying?.Invoke(this.gameObject);
         Destroy(this.gameObject);
     }
 
