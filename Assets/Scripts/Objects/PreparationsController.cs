@@ -78,7 +78,7 @@ public class PreparationsController : MonoBehaviour
             Managers.Configuration.Currency -= _preparationData.SelectedHelicopterPart.Price;
             Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id] = true;
             _preparationData.SelectedPreview.GetComponent<PreviewButton>().RemoveLock();
-            OnUnlockingPreview.Invoke(false);
+            OnUnlockingPreview.Invoke(true);//Передаём true- если хотим убрать кнопку Unlock
         }
     }
     private void EscapeButtonPressed() //При нажатии кнопки Escape, выходит из выбора компонентов

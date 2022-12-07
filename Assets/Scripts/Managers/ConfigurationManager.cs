@@ -52,12 +52,11 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
     }
     private void Initialize()
     {
-        Currency = 200; // HESOYAM like
         DefaultConfiguration();
     }
     public void DefaultConfiguration() //Инициализация пустой конфигурации при старте новой игре.
     {
-        Currency = 0;
+        Currency = 1000; // HESOYAM like
         _helicopterData.Clear();
         _unlockedObjects.Clear();
         _unlockedObjects.Add("Cabin", new List<bool>(Enumerable.Repeat(false,4).ToList()));
@@ -74,13 +73,11 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
             var helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
             _preparationData.TryToChangePart(helicopterParts[0], _helicopterData[0].Value);
             _preparationData.TryToChangePart(helicopterParts[1], _helicopterData[1].Value);
-            helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().ToList();
-            _helicopterData.Reverse();
-            GameObject lastSelectedGameObject = null;
+            helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
             for (int partIndex = 0; partIndex < helicopterParts.Count; partIndex++)
             {
                 if (helicopterParts[partIndex].Type == "Gun")
-                    lastSelectedGameObject = _preparationData.TryToChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
+                    _preparationData.TryToChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
             }
         }
     }
