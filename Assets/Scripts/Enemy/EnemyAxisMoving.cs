@@ -5,16 +5,17 @@ using UnityEngine;
 public class EnemyAxisMoving : DroidEnemy
 { 
     [SerializeField]public Vector3 _movementDirection;
-    [SerializeField]private float _speed = 15f;
+    [SerializeField]public float _speed = 20f;
     [SerializeField]private int idDirecetion=1;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Vector3 basePosition;
-    [SerializeField] private Vector3 endlessPosition;
+    [SerializeField] public Vector3 endlessPosition;
     void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
         basePosition = this.transform.position;
-        endlessPosition = basePosition + _movementDirection;
+        _movementDirection = endlessPosition;
+        if (endlessPosition.x < basePosition.x) idDirecetion = -1;
     }
 
     // Update is called once per frame
@@ -25,12 +26,12 @@ public class EnemyAxisMoving : DroidEnemy
     }
     void MoveByAxis()
     {
-        Vector3 direction = (endlessPosition - basePosition).normalized;
-        _rb.velocity = new Vector2(idDirecetion, 0) * _speed * Time.deltaTime;
-        if (Mathf.Abs(transform.position.x - endlessPosition.x)<0.05f)
+        Vector3 direction = (-this.transform.position +_movementDirection ).normalized;
+        _rb.velocity = new Vector2(direction.x,direction.y) * _speed * Time.deltaTime;
+        if (Mathf.Abs(transform.position.x - _movementDirection.x)<0.05f && Mathf.Abs(transform.position.y - _movementDirection.y)<0.05f)
         {
-            if (idDirecetion == 1) endlessPosition = basePosition - _movementDirection;
-            else endlessPosition = basePosition + _movementDirection;
+            if (idDirecetion == 1) _movementDirection = basePosition ;
+            else _movementDirection = endlessPosition;
             idDirecetion *= -1;
         }
 
@@ -38,10 +39,7 @@ public class EnemyAxisMoving : DroidEnemy
     void OnDrawGizmosSelected()
     {
 
-        Gizmos.color = Color.yellow;
-        Vector3 _gizmosDrawLeft = new Vector3(basePosition.x- _movementDirection.x, _movementDirection.y, _movementDirection.z);
-        Gizmos.DrawWireCube(_gizmosDrawLeft, new Vector3(1, 1, 1));
-        Vector3 _gizmosDraw = new Vector3(basePosition.x + _movementDirection.x, _movementDirection.y, _movementDirection.z);
+        Vector3 _gizmosDraw = endlessPosition;
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(_gizmosDraw, new Vector3(1, 1, 1));
     }

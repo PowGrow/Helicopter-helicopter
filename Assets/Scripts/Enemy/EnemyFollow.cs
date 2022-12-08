@@ -7,7 +7,7 @@ public class EnemyFollow : DroidEnemy
     public GameObject player;
     private Rigidbody2D rb;
     public float offset;
-    private float speed = 1;
+    public float speed = 1;
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody2D>();

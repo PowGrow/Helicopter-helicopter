@@ -18,7 +18,8 @@ public class DroidEnemy : MonoBehaviour, IEnemy
 
     private void Die()
     {
-        spawn.enemyList[spawn.lineOfEnemies].Remove(this.gameObject);
+        spawn.curentLineEnemiesCount -= 1;
+        spawn.enemyList.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
 
@@ -32,7 +33,7 @@ public class DroidEnemy : MonoBehaviour, IEnemy
     private void Awake()
     {
         spawn = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnEnemies>();
-        Health = 100;
+        Health = 10;
         _sprite = GetComponent<SpriteRenderer>();
     }
 }
