@@ -16,6 +16,7 @@ public class UIHealth : MonoBehaviour
         _animator = GetComponent<Animator>();
         _health = Managers.GameObjects.GetObject("Player").GetComponent<Health>();
         _animator.speed = 0;
+        _animator.Play("health_ui", 0, 100);
     }
     private void OnEnable()
     {
