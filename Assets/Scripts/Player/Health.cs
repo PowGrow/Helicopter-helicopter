@@ -10,7 +10,7 @@ public class Health : MonoBehaviour, IHealth
     private float _currentHealth = 1f;
     private float _armor = 0f;
 
-    public Action OnHealthUpdated;
+    public Action<float> OnHealthUpdated;
 
     public float MaxHealth
     {
@@ -30,7 +30,7 @@ public class Health : MonoBehaviour, IHealth
             _currentHealth = value;
             if (_currentHealth <= 0)
                 _currentHealth = 0;
-            OnHealthUpdated?.Invoke();
+            OnHealthUpdated?.Invoke(_currentHealth);
         }
     }
 

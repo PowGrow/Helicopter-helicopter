@@ -1,25 +1,22 @@
-using System;
-using TMPro;
 using UnityEngine;
 
 public class UIHealth : MonoBehaviour
 {
     private Health _health;
-    private TextMeshProUGUI _healthLabel;
+    private Animator _animator;
 
-    private void UpdateHealth()
+    private void UpdateHealth(float currentHealth)
     {
-        var text = _health.CurrentHealth;
-        _healthLabel.text = text.ToString();
+        var healthPercent = _health.CurrentHealth / _health.MaxHealth;
+        _animator.Play("health_ui", 0, healthPercent);
     }
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         _health = Managers.GameObjects.GetObject("Player").GetComponent<Health>();
-        _healthLabel = this.GetComponent<TextMeshProUGUI>();
-        UpdateHealth();
+        _animator.speed = 0;
     }
-
     private void OnEnable()
     {
         _health.OnHealthUpdated += UpdateHealth;
