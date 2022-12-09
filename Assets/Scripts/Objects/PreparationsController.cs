@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PreparationsController : MonoBehaviour
 {
     [SerializeField] private PreparationData _preparationData;
-    private PlayerControls _playerControls; //Экземпрял класса input "PlayerControls"
+    private PlayerControls _playerControls; //Экземпрял класса input action "PlayerControls"
     private RaycastHit2D _screenHit; //Точка клика по экрану
     private List<Button> PreviewButtonList;
 
