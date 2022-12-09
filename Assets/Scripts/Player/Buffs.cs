@@ -5,21 +5,25 @@ using UnityEngine;
 public class Buffs : MonoBehaviour
 {
     [SerializeField] private float _buffDuration = 30f;
-    private float _damageModificator = 1f;
+    private float _powerModificator = 1f;
     private float _speedModificator = 1f;
     private float _lifetimeModificator = 1f;
 
-    private float _damageTimer = 0f;
+    private float _powerTimer = 0f;
     private float _speedTimer = 0f;
 
-    public  float DamageModificator
+    public float BuffDuration
     {
-        get { return _damageModificator; }
+        get { return _buffDuration; }
+    }
+    public  float PowerModificator
+    {
+        get { return _powerModificator; }
         set 
         {
             if(value > 1)
-                _damageTimer = _buffDuration;
-            _damageModificator = value;
+                _powerTimer = _buffDuration;
+            _powerModificator = value;
         }
     }
 
@@ -40,9 +44,9 @@ public class Buffs : MonoBehaviour
         set { _lifetimeModificator = value; }
     }
 
-    public float DamageTimer
+    public float PowerTimer
     {
-        get { return _damageTimer; }
+        get { return _powerTimer; }
     }
 
     public float SpeedTimer
@@ -52,8 +56,8 @@ public class Buffs : MonoBehaviour
 
     private void Update()
     {
-        if (_damageTimer > 0)
-            _damageTimer -= Time.deltaTime;
+        if (_powerTimer > 0)
+            _powerTimer -= Time.deltaTime;
 
         if (_speedTimer > 0)
             _speedTimer -= Time.deltaTime;

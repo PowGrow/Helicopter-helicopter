@@ -10,6 +10,6 @@ public class DamageBooster : BoosterBase
 
     private void ApplyBooster(float value)
     {
-        _playerBuffs.DamageModificator = base.value;
+        _playerBuffs.PowerModificator = base.value;
     }
 }

@@ -39,7 +39,7 @@ public class Guns : MonoBehaviour, IShooter
                 {
                     var projectile = Managers.GameObjects.Projectiles.Last();
                     projectile.DamageMultiplier = _gunInfoList[currentGunIndex].DamageMultiplier;
-                    projectile.DamageModificator = _buffs.DamageModificator;
+                    projectile.DamageModificator = _buffs.PowerModificator;
                     projectile.SpeedModificator = _buffs.SpeedModificator;
                 }
             }
