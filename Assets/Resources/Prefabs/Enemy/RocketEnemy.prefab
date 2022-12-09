@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2759161617c7f8d40a560145de597188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 11400000, guid: ea2843cfa4008aa4987768f33562070e, type: 2}
+  _gun: {fileID: 11400000, guid: da0f5103dbbf918428d2824326c6ec58, type: 2}
   _shootingPoint: {fileID: 5869330520064627603}
 --- !u!114 &2648781549128523066
 MonoBehaviour:

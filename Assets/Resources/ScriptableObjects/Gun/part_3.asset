@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: part_3
   m_EditorClassIdentifier: 
   Id: 3
-  Type: 0
   ShootingInterval: 0.15
   DamageMultiplier: 1.1
-  ProjectilePrefab: {fileID: 5927899080415761015, guid: 47027b7c46d1aef4fb5c5eaf443e120f, type: 3}
+  ProjectilePrefab: {fileID: 5927899080415761015, guid: d8da71db4bf3c034dbb791a59a662895, type: 3}
   Sprite: {fileID: 21300000, guid: f635d699ef378234080a76a140b9ff1b, type: 3}
   Price: 60
   Description: Two is always better than one, shoot even faster!
