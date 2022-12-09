@@ -36,12 +36,19 @@ public class EnemyHealth : MonoBehaviour, IHealth
         if (_currentHealth <= 0)
             Die();
         else
-            StartCoroutine(BlinkDamage());
+            StartCoroutine(Blink(Color.red));
     }
 
-    private IEnumerator BlinkDamage()
+    public void GetHealing(float value)
     {
-        _spriteRenderer.color = Color.red;
+        _currentHealth += value;
+        OnHealthCnaged?.Invoke(_currentHealth);
+        StartCoroutine(Blink(Color.green));
+    }
+
+    private IEnumerator Blink(Color color)
+    {
+        _spriteRenderer.color = color;
         yield return new WaitForSeconds(0.01f);
         _spriteRenderer.color = Color.white;
     }

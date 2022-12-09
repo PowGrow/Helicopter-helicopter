@@ -47,6 +47,11 @@ public class Health : MonoBehaviour, IHealth
             StartCoroutine(Die());
     }
 
+    public void GetHealing(float value)
+    {
+        CurrentHealth += value;
+    }
+
     private IEnumerator Die()
     {
         _deathLabel.gameObject.SetActive(true);

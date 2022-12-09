@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpeedBooster : BoosterBase
+public class AidBooster : BoosterBase
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -10,11 +10,6 @@ public class SpeedBooster : BoosterBase
 
     private void ApplyBooster(float value)
     {
-        _playerBuffs.SpeedModificator = base.value;
-    }
-
-    public void DropItem()
-    {
-        throw new System.NotImplementedException();
+        _playerBuffs.gameObject.GetComponent<IHealth>().GetHealing(base.value);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GearCurrency : MonoBehaviour
 {
+    public float DropChance = 100;
     private Currency _currencyObject;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidBody;

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 66a507526d3a34f4ab2286602a26971c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _currencyGearPrefab: {fileID: 3129126148552962308, guid: da6401c1a879f194982c4cbc0bbbaf15, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
