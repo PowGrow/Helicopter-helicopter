@@ -14,7 +14,6 @@ public class EnemyGun : MonoBehaviour, IShooter
             Managers.GameObjects.Projectiles.Last().DamageMultiplier = _gun.DamageMultiplier;
             Managers.GameObjects.Projectiles.Last().DamageModificator = 0.5f;
             Managers.GameObjects.Projectiles.Last().SpeedModificator = 0.5f;
-            bullet.tag = this.tag;
             bullet.layer = 11; // 11 - EnemyProjectiles
             bullet.transform.SetPositionAndRotation(_shootingPoint.position, transform.rotation);
             _timer = 0;
