@@ -30,12 +30,12 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Start()
     {
         PlayerObject = Managers.GameObjects.GetObject("Player");
-        ChangeBehaviour(EnemyBehavior.active);
     }
 
     private void FixedUpdate()
     {
-        IEnemyBehavior.Move(this.transform, PlayerObject.transform);
+        if(IEnemyBehavior != null)
+            IEnemyBehavior.Move(this.transform, PlayerObject.transform);
     }
 
     protected virtual void CheckCurrentBehavior(float value)

@@ -8,6 +8,7 @@ public class GameSpawner : MonoBehaviour
 {
     [SerializeField] private int _totalEnemyCount;
     [SerializeField] private int _enemyOnScreen;
+    [SerializeField] private int _spawnTimeDelay;
     [SerializeField] private List<GameObject> _enemyTypeList;
     [SerializeField] private GameObject _enemyBehaviorContainerObject;
     [SerializeField] private TextMeshProUGUI _returningLabel;
@@ -35,7 +36,7 @@ public class GameSpawner : MonoBehaviour
         var health = enemyGameObject.GetComponent<EnemyHealth>();
         health.OnEnemyDying -= RemoveEnemy;
         if(_spawnedEnemyCount < _totalEnemyCount)
-            StartCoroutine(SpawnOverTime());
+            StartCoroutine(SpawnOverTime(_spawnTimeDelay));
         if (_spawnedEnemyCount >= _totalEnemyCount && _enemies.Count() == 0)
             StartCoroutine(ReturnToBase());
 
@@ -66,11 +67,11 @@ public class GameSpawner : MonoBehaviour
         _spawnedEnemyCount++;
     }
 
-    private IEnumerator SpawnOverTime()
+    private IEnumerator SpawnOverTime(float timeToWait)
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(timeToWait);
         if (_enemies.Count() < _enemyOnScreen)
-            SpawnEnemy(_spawnPointsList[Random.Range(0, 4)]);
+            SpawnEnemy(_spawnPointsList[Random.Range(0, _enemyOnScreen)]);
         
     }
 
