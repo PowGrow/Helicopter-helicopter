@@ -35,14 +35,14 @@ public class Managers : MonoBehaviour
         Levels = GetComponent<LevelManager>();
         Data = GetComponent<DataManager>();
         Configuration = GetComponent<ConfigurationManager>();
-        
-        _startSequence = new List<IGameManager>();
 
-
-        _startSequence.Add(GameObjects);
-        _startSequence.Add(Levels);
-        _startSequence.Add(Data);
-        _startSequence.Add(Configuration);
+        _startSequence = new List<IGameManager>
+        {
+            GameObjects,
+            Levels,
+            Data,
+            Configuration
+        };
 
         StartCoroutine(StartupManagers());
     }

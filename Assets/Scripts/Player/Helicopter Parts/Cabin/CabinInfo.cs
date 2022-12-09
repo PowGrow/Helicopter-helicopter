@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CabinInfo : MonoBehaviour, IHelicopterPart
 {
-    [SerializeField] private Cabin  _cabin;//Текущая кабина ScriptableObject, должен быть прикреплён для получения всей информации
-    [SerializeField] private int    _id;//ID кабины
-    [SerializeField] private float  _cabinHealth = 0f; //Поле здоровья кабины вертолёта
-    [SerializeField] private float  _cabinArmor = 0f; //Поле брони кабины вертолёта
-    [SerializeField] private Sprite _sprite;//Спрайт кабины
-    [SerializeField] private int    _price;             //Цена улучшения
-    [SerializeField] private string _description;    //Описание крыльев
+    //All this serialize fields,except _cabin need only to view infromation about gun in editor in playmode, if all data was loaded
+    [SerializeField] private Cabin  _cabin;
+    [SerializeField] private int    _id;
+    [SerializeField] private float  _cabinHealth = 0f;
+    [SerializeField] private float  _cabinArmor = 0f;
+    [SerializeField] private Sprite _sprite;
+    [SerializeField] private int    _price;
+    [SerializeField] private string _description;
 
     private Health _playerHealth;
 
@@ -62,7 +63,7 @@ public class CabinInfo : MonoBehaviour, IHelicopterPart
         get { return this.gameObject; }
     }
 
-    //Получаем значение здоровья и брони в зависимости от установленной кабины вертолёта
+    //load information from scriptableobject to visualize it in editor
     private void SetCabinInfoFromContainer() 
     {
         Utils.SetObjectInfo(this, _cabin);

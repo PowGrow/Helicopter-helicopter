@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PreparationsController : MonoBehaviour
 {
     [SerializeField] private PreparationData _preparationData;
-    private PlayerControls _playerControls; //Экземпрял класса input action "PlayerControls"
-    private RaycastHit2D _screenHit; //Точка клика по экрану
+    private PlayerControls _playerControls; // Class input action "PlayerControls" instance
+    private RaycastHit2D _screenHit; //Point of screen click
     private List<Button> PreviewButtonList;
 
 
@@ -20,10 +20,11 @@ public class PreparationsController : MonoBehaviour
     public Action<bool>                                     OnSwitchingDescriptionContainer;
     public Action<GameObject, int>                          OnClearSelection;
 
-    private void OnScreenClick(Vector3 mousePosition) //Вызывается при клике на экран
+    private void OnScreenClick(Vector3 mousePosition)
     {
         //Если при клике попадается коллайдер, то окрашиваем ранее выбранный объект в "стандартный" цвет, если он есть и выбираем новый объект
         //окрашивая его в цвет "выбранной части вертолёта"
+        //If on click we hit collied, then color early selected object in to "default" color, if it is not null and choose new object coloring it in to "selected" color;
         _screenHit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(mousePosition), Vector2.zero);
 
         if (_screenHit.collider != null)
@@ -47,10 +48,10 @@ public class PreparationsController : MonoBehaviour
             }
         }
     }
-    private void OnPreviewButtonClick(int index) //Выполняется при выборе одной из частей вертолёта, что бы заменить текущую часть
+    private void OnPreviewButtonClick(int index)
     {
         if (_preparationData.SelectedObjectPrevious != -1
-            && !Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id]) //Если при выборе нового объекта текущий не был куплен то возвращаем сперва конфигурацию на предыдущую
+            && !Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id]) //If when choosing new part of helicopter selected object was not buyed then select previous buyed part
             SelectPart(_preparationData.SelectedObjectPrevious);
         SelectPart(index);
 
@@ -65,23 +66,23 @@ public class PreparationsController : MonoBehaviour
             OnPartWasUnlocked.Invoke(Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id]);
         }
     }
-    public void DeployButtonClick() //Вызывается при клике на кнопку "Deploy" совершается переход на следующую сцену "Game"
+    public void DeployButtonClick() //Called on "Deploy" button click, moving to next scene "Game"
     {
         Managers.Configuration.HelicopterData = Managers.Data.GetHelicopterData(Managers.GameObjects.GetObject("Player"));
         Time.timeScale = 1;
         Managers.Levels.GoToNext();
     }
-    public void UnlockButtonClick() //Вызывается при клике на кнопку unlock, для покупки новой части вертолёта
+    public void UnlockButtonClick() //Called on "Unlock" button click, unlocking new helicopter part
     {
         if(_preparationData.SelectedHelicopterPart.Price <= Managers.Configuration.Currency)
         {
             Managers.Configuration.Currency -= _preparationData.SelectedHelicopterPart.Price;
             Managers.Configuration.UnlockedObjects[_preparationData.SelectedHelicopterPart.Type][_preparationData.SelectedHelicopterPart.Id] = true;
             _preparationData.SelectedPreview.GetComponent<PreviewButton>().RemoveLock();
-            OnUnlockingPreview.Invoke(true);//Передаём true- если хотим убрать кнопку Unlock
+            OnUnlockingPreview.Invoke(true);//Pass true- if we want to hide "Unlock" button.
         }
     }
-    private void EscapeButtonPressed() //При нажатии кнопки Escape, выходит из выбора компонентов
+    private void EscapeButtonPressed()
     {
         ResetSelectionToBoughtPart();
         if (_preparationData.SelectedObject == null)
@@ -93,7 +94,7 @@ public class PreparationsController : MonoBehaviour
         OnSwitchingDescriptionContainer.Invoke(false);
         _preparationData.SelectedObject = null;
     }
-    public void ResetSelectionToBoughtPart() //Метод сбрасывающий выбор компонента на предыдущий разблокированный, в случае если новый выбраный не был куплен
+    public void ResetSelectionToBoughtPart() //If when choosing new part of helicopter selected object was not buyed then select previous buyed part
     {
         if (_preparationData.SelectedObject != null)
         {

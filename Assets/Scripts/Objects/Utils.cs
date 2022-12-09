@@ -1,12 +1,10 @@
-using System;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
 public static class Utils
 {
-    //ћетод заполн€ющий информацию из одного объекта в другой, с учЄтом совпадени€ очередности объ€вленных полей и свойств нужен исключительно дл€ заполнени€ информации дл€ доступности в UnityEditor
+    //Method filling information from one object in to other, taking into account match order of field and properties, need only for filling information in UnityEditor
     public static void SetObjectInfo(object to, object from)
     {
         var toInfoProperties = to.GetType().GetRuntimeProperties().ToList();
@@ -18,7 +16,7 @@ public static class Utils
         }
     }
 
-    public static int ObjectCount(string tag)
+    public static int PartByTypeCount(string tag)
     {
         return Managers.Configuration.UnlockedObjects[tag].Count();
     }

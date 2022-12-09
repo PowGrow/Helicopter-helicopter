@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Class controling parent container of all description information and unlocking button
 public class UIDescriptionContainer : MonoBehaviour
 {
     [SerializeField] private GameObject _descriptionContainer;

@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class AutoAimMissile : Projectile
 {
-     internal GameObject _target; //Поле цели ракеты
+    private GameObject _target;
+
+    public GameObject Target
+    {
+        get { return _target; }
+    }
 
     private void Update()
     {
-        //Двигается вперёд если цели нет, если есть, то двигается к цели
+        //Moving forward if target is null
         if(_target == null)
         {
             transform.Translate(0, speed * SpeedModificator * Time.deltaTime, 0);
@@ -17,7 +22,6 @@ public class AutoAimMissile : Projectile
             transform.up = _target.transform.position - transform.position;
         }
     }
-    //При соприкосновении ракеты с врагом взрывается и наности урон врагу
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IHealth collisionHealth = collision.transform.GetComponent<IHealth>();
@@ -25,7 +29,7 @@ public class AutoAimMissile : Projectile
         Destroy(this.gameObject);
     }
 
-    //Метод вызываемый детектором боеголовки и указыващий цель для ракеты
+    //Method to call by aim assist to set target
     public void SetAimTarget(GameObject target)
     {
         _target = target;

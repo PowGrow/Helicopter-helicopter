@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Class calling on preparation and game scene, call loading setted helicopter data
 public class HelicopterPreparation : MonoBehaviour
 {
     private GameObject SetHelicopterGameObject()
@@ -14,7 +15,7 @@ public class HelicopterPreparation : MonoBehaviour
         {
             case 2:
                 this.transform.position = new Vector3(-1 * (Camera.main.orthographicSize * ((float)Screen.width / (float)Screen.height)) + this.transform.localScale.x,
-                                            this.transform.position.y, this.transform.position.z); //Устанавливаем позицию сверху слева, в зависимости от размера экрана
+                                            this.transform.position.y, this.transform.position.z); //Setting position of helicopter deppending on screen ratio
                 break;
             case 3:
                 var heightBottom = -1 * Camera.main.orthographicSize + this.gameObject.transform.localScale.x;

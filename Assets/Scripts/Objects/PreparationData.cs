@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Class storing data about current helicopter configuration, current selected object, previous selected, selected preview and etc...
 public class PreparationData : MonoBehaviour
 {
     [SerializeField] private PreparationsController _preparationsController;
@@ -37,7 +38,7 @@ public class PreparationData : MonoBehaviour
         set { _selectedObjectPrevious = value; }
     }
 
-    public GameObject ChangePart(int partId) //Замена запчастей вертолёта, если изменяется
+    public GameObject ChangePart(int partId)
     {
         var objectId = _selectedHelicopterPart.Id;
         if (partId != objectId)
@@ -54,7 +55,7 @@ public class PreparationData : MonoBehaviour
         }
         return null;
     }
-    public GameObject TryToChangePart(IHelicopterPart partToSelect, int partId)
+    public GameObject ChooseAndChangePart(IHelicopterPart partToSelect, int partId)
     {
         SelectedObject = partToSelect.partGameObject;
         ChangePart(partId);

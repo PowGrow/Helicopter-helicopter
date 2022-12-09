@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Class setting border by screen size
 public class Border : MonoBehaviour
 {
     private const float SHIP_BORDER_OFFSET_VERTICAL = 1f;

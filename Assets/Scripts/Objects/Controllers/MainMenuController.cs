@@ -17,7 +17,7 @@ public class MainMenuController : MonoBehaviour
         Managers.Levels.GoToNext();
     }
 
-    public void OnContinueButtonClick() //Загружаем игру
+    public void OnContinueButtonClick()
     {
         if(Managers.Levels.SceneId() != 1)
             Utils.TimeScale();
@@ -25,19 +25,19 @@ public class MainMenuController : MonoBehaviour
         Managers.Levels.GoToNext();
     }
 
-    private void CheckSave()//Проверяем наличие сохранения и при его отсутвии отключаем кнопку Продолжить игру.
+    private void CheckSave()
     {
         if (!Managers.Data.IsThereASave())
             _continueButton.interactable = false;
     }
 
-    public void OnMainMenuButtonClick()//Возвращаемся в главное меню
+    public void OnMainMenuButtonClick()
     {
         Utils.TimeScale();
         Managers.Levels.GoTo(1);
     }
     
-    public void OnSaveGameButtonClick()//Сохраняем игру
+    public void OnSaveGameButtonClick()
     {
         Managers.Data.SaveGameState();
         Utils.TimeScale();
@@ -45,7 +45,7 @@ public class MainMenuController : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    public void OnExitButtonClick()//Выходим из игры
+    public void OnExitButtonClick()
     {
         Application.Quit();
     }

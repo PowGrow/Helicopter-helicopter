@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//Class save all modificator information, and count time when booster should gone, using by Guns when shooting new projectiles and UI elements to visualize duration
 public class Buffs : MonoBehaviour
 {
     [SerializeField] private float _buffDuration = 30f;

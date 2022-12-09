@@ -1,7 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//Class which set correct aspect ration to image in preview button
 public class ItemPreviewAutoSizer : MonoBehaviour
 {
     private Image _imageRenderer;

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-//Базовый класс снаряда, содержит информацию о времени жизни снаряда, скорость, урон и поля модификатора этих значений
+//Any projectile base class
 public class Projectile: MonoBehaviour, IProjectile
 {
     [SerializeField] protected float bulletLifetime = 1f;

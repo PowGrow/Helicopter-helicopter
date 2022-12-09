@@ -71,13 +71,13 @@ public class ConfigurationManager : MonoBehaviour, IGameManager
         {
             PreparationData _preparationData = new PreparationData();
             var helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
-            _preparationData.TryToChangePart(helicopterParts[0], _helicopterData[0].Value);
-            _preparationData.TryToChangePart(helicopterParts[1], _helicopterData[1].Value);
+            _preparationData.ChooseAndChangePart(helicopterParts[0], _helicopterData[0].Value);
+            _preparationData.ChooseAndChangePart(helicopterParts[1], _helicopterData[1].Value);
             helicopterParts = HelicopterObject.GetComponentsInChildren<IHelicopterPart>().Reverse().ToList();
             for (int partIndex = 0; partIndex < helicopterParts.Count; partIndex++)
             {
                 if (helicopterParts[partIndex].Type == "Gun")
-                    _preparationData.TryToChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
+                    _preparationData.ChooseAndChangePart(helicopterParts[partIndex], _helicopterData[partIndex].Value);
             }
         }
     }

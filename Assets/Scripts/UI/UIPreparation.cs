@@ -9,16 +9,16 @@ public class UIPreparation : MonoBehaviour
 {
     [SerializeField] private PreparationsController         _preparationController;
     [SerializeField] private MainMenuController             _mainMenuController;
-    [SerializeField] private GameObject         _deployButton;//Кнопка начала миссии
-    [SerializeField] private GameObject         _previewPrefab; //Префаб кнопок выбора компонентов вертолёта
-    [SerializeField] private Transform          _partsPreviewButtonContainer; //Ссылка на родительский контейнер всех кнопок выбора компонентов вертолёта
-    [SerializeField] private Color              _chosenObjectColor;//Цвет выбранного объекта
-    [SerializeField] private Color              _defaultPreviewColor; //Стандартный цвет задника preview элемента
-    [SerializeField] private Color              _defaultObjectColor; //Стандартный цвет элемента вертолёта
-    [SerializeField] private UIPartsDescription _partsDescription;//Описание выбранного объекта
-    [SerializeField] private TextMeshProUGUI    _gameSavedLabel;//Лейбл "Игра сохранена"
+    [SerializeField] private GameObject         _deployButton;
+    [SerializeField] private GameObject         _previewPrefab;
+    [SerializeField] private Transform          _partsPreviewButtonContainer; //Reference to parent object of all preview buttons
+    [SerializeField] private Color              _chosenObjectColor;//Color of "Chosen" object
+    [SerializeField] private Color              _defaultPreviewColor; //Default preview background color
+    [SerializeField] private Color              _defaultObjectColor; //Default helicopter part color
+    [SerializeField] private UIPartsDescription _partsDescription;
+    [SerializeField] private TextMeshProUGUI    _gameSavedLabel;
 
-    private float                   _previewOffset; //Сдвиг по горизонтали для каждой кнопки предпосмотра элементов вертолёта
+    private float _previewOffset; //Horizontal offset for each preview button
 
     public Transform PartsPreviewButtonParent
     {
@@ -37,7 +37,7 @@ public class UIPreparation : MonoBehaviour
         get { return _defaultObjectColor; }
     }
     
-    private void ClearPreviewButtons()  //Удаляем все созданные ранее кнопки предпросмотра компонентов
+    private void ClearPreviewButtons()  //Clearing all previous created preview buttons
     {
         if(PartsPreviewButtonParent.childCount > 0)
         {
@@ -47,19 +47,19 @@ public class UIPreparation : MonoBehaviour
             }
         }
     }
-    private PreviewButton CreatePreviewButton(GameObject buttonPrefab, float offset, int index, UnityEngine.Object part) //Создаём кнопку предпросмотра, устанавливаем ей нужную позицию в родительском объекте в зависимости от её номера
+    private PreviewButton CreatePreviewButton(GameObject buttonPrefab, float offset, int index, UnityEngine.Object part) //Creating preview button, setting it parent and position defined by its index
     {
-        var previewButtonObject = Instantiate(buttonPrefab, PartsPreviewButtonParent, false); //Инициализируем
-        previewButtonObject.transform.localPosition = new Vector2((previewButtonObject.GetComponent<RectTransform>().sizeDelta.x + offset) * index, 0); //Задаём позицию со смещением по индексу
+        var previewButtonObject = Instantiate(buttonPrefab, PartsPreviewButtonParent, false);
+        previewButtonObject.transform.localPosition = new Vector2((previewButtonObject.GetComponent<RectTransform>().sizeDelta.x + offset) * index, 0);
         var previewButton = previewButtonObject.GetComponent<PreviewButton>();
-        previewButton.ItemPreviewImageSprite = part.GetType().GetField("Sprite").GetValue(part) as Sprite; //Устанавливаем спрайт и имя
+        previewButton.ItemPreviewImageSprite = part.GetType().GetField("Sprite").GetValue(part) as Sprite;
         previewButton.ItemPreviewName = part.GetType().GetField("Id").GetValue(part).ToString();
         return previewButton;
     }
     public List<Button> CreatePreviewButtons(string objectTag, IHelicopterPart selectedPart)
     {
         List<Button> buttonList = new List<Button>();
-        var buttonCount = Utils.ObjectCount(objectTag);
+        var buttonCount = Utils.PartByTypeCount(objectTag);
         for(int buttonIndex = 0; buttonIndex < buttonCount; buttonIndex++)
         {
             var part = Resources.Load($"ScriptableObjects/{objectTag}/part_{buttonIndex}", Type.GetType(objectTag));
@@ -70,7 +70,7 @@ public class UIPreparation : MonoBehaviour
         }
         return buttonList;
     }
-    private void SelectDraw(GameObject objectToSelect, GameObject previouslySelectedObject, int rendererType)//Визуальная отрисовка изменения цвета вновь выбранного объекта, rendererType 1: SpriteRenderer, 2:Image
+    private void SelectDraw(GameObject objectToSelect, GameObject previouslySelectedObject, int rendererType)//Color selected object and reseting color for previous selected object, rendererType 1: SpriteRenderer, 2:Image
     {
         switch (rendererType)
         {
@@ -90,10 +90,10 @@ public class UIPreparation : MonoBehaviour
     }
     public GameObject SelectObject(GameObject objectToSelect,GameObject previouslySelectedObject)
     {
-        SelectDraw(objectToSelect, previouslySelectedObject, 1); //Визуально выбираем новый объект
+        SelectDraw(objectToSelect, previouslySelectedObject, 1);
         return objectToSelect;
     }
-    public void SelectPreviewButton(GameObject previewObject, IHelicopterPart selectedPart, GameObject selectedPreview)
+    public void SelectPreviewButton(GameObject previewObject, IHelicopterPart selectedPart, GameObject selectedPreview) //Selecting preview button, calling its description and price from ScriptableObject container
     {
         SelectDraw(previewObject, selectedPreview, 2);
         _partsDescription.SetDescriptionText(selectedPart.Description);
@@ -123,7 +123,7 @@ public class UIPreparation : MonoBehaviour
     }
     private void Awake()
     {
-        _previewOffset = (float)Screen.width / (float)Screen.height; //Устанавливаем значение отступа кнопок в зависимости размера экрана
+        _previewOffset = (float)Screen.width / (float)Screen.height; //Setting offset defined by screen ratio
     }
     private void OnEnable()
     {

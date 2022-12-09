@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-//Класс работающий с объектом DescriptionTextObject, записывает в него текст описания выбранного компонента из JSON
+//Class setting selected helicopter part description text to UI view
 public class UIPartsDescription : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI             _descriptionComponent;
@@ -9,13 +9,11 @@ public class UIPartsDescription : MonoBehaviour
 
     public void SetDescriptionText(string description)
     {
-        //Устанавливаем значение текста в зависимости от выбранной части вертолёта и его идентификатора
         _descriptionComponent.text = description;
     }
 
     public void ClearDescriptionText()
     {
-        //Очищаем описание
         _descriptionComponent.text = string.Empty;
     }
 

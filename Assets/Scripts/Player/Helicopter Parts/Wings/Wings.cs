@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Wings : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _wingsGameObjectList; //Список всех объектов крыльев вертолёта
+    [SerializeField] private List<GameObject> _wingsGameObjectList; //All helicopter wings objects
 
-    //Публичное свойство реализующее интерфейс IHelicopterPart, передающее список всех объектов родительского контейнера
     public List<GameObject> ObjectList
     {
         get { return _wingsGameObjectList; }

@@ -30,7 +30,7 @@ public class Health : MonoBehaviour, IHealth
             _currentHealth = value;
             if (_currentHealth <= 0)
                 _currentHealth = 0;
-            OnHealthUpdated?.Invoke(_currentHealth);
+            OnHealthUpdated?.Invoke(_currentHealth); //On updating health invoking UI method to update information on screen
         }
     }
 
@@ -42,7 +42,7 @@ public class Health : MonoBehaviour, IHealth
 
     public void GetDamage(float value)
     {
-        CurrentHealth -= value - (value / 10 * Armor);
+        CurrentHealth -= value - (value / 10 * Armor); //Each armor unit absorbing 10% of harm
         if (_currentHealth <= 0)
             StartCoroutine(Die());
     }

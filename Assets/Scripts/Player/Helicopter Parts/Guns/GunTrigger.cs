@@ -1,12 +1,11 @@
 using UnityEngine;
 
-//Класс реализующий спусковой крючок пушки
 public class GunTrigger : MonoBehaviour
 {
-    private float _timer; //Таймер для учёта скорости стрельбы пушки
-    private GunInfo _gunInfo; //Поле информации о пушке
+    private float _timer;
+    private GunInfo _gunInfo;
 
-    //Нажатие на курок вызывает создание снаряда и возвращение полученного экземпляра IProjectile вызывающей функции, если прошёл нужны интервал времени после последнего создания объекта
+
     public GameObject Click(Vector2 gunPosition, Quaternion gunRotation)
     {
         if(_timer >= _gunInfo.ShootingInterval)
@@ -21,16 +20,16 @@ public class GunTrigger : MonoBehaviour
 
     void Update()
     {
-        _timer += Time.deltaTime;    //Считаем прошедшее время
+        _timer += Time.deltaTime;
     }
 
     private void Awake()
     {
-        _gunInfo = GetComponent<GunInfo>(); //Получаем информацию о пушке
+        _gunInfo = GetComponent<GunInfo>();
     }
 
     private void Start()
     {
-        _timer = 0; //Инициализируем поле таймера
+        _timer = 0;
     }
 }

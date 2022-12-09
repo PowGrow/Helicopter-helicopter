@@ -1,11 +1,7 @@
-using Newtonsoft.Json.Linq;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GearCurrency : MonoBehaviour
 {
-    public float DropChance = 100;
     private Currency _currencyObject;
     private SpriteRenderer _spriteRenderer;
     private Rigidbody2D _rigidBody;

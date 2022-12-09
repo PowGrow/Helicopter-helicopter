@@ -8,15 +8,10 @@ public class AutoAimDetector : MonoBehaviour
         _autoAimMissle = GetComponentInParent<AutoAimMissile>();
     }
 
-    //ѕри вхождении коллайдера врага в коллайдер детектора направл€ет ракету в его сторону
+    //Setting target aftter triggering collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(_autoAimMissle._target == null)
-        {
-            if (collision.transform.tag == "Enemy")
-            {
-                _autoAimMissle.SetAimTarget(collision.transform.gameObject);
-            }
-        }
+        if(_autoAimMissle.Target == null)
+            _autoAimMissle.SetAimTarget(collision.transform.gameObject);
     }
 }

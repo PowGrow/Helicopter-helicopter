@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class GunInfo : MonoBehaviour, IHelicopterPart
 {
-    [SerializeField] private Gun                        _gun; //Текущая пушка ScriptableObject, должен быть прикреплён для получения всей информации
-    [SerializeField] private int                        _Id; //ID пушки
-    [SerializeField] private float                      _shootingInterval; //Поле скорости стрельбы
-    [SerializeField] private float                      _damageMultiplier; //Поле модификатора урона пушки
-    [SerializeField] private GameObject                 _projectilePrefab; //Префаб снаряда
-    [SerializeField] private Sprite                     _sprite;//Спрайт пушки
-    [SerializeField] private int                        _price;//Цена улучшения
-    [SerializeField] private string                     _description;//Описание пушки
+    //All this serialize fields,except _gun need only to view infromation about gun in editor in playmode, if all data was loaded
+    [SerializeField] private Gun                        _gun; 
+    [SerializeField] private int                        _Id;
+    [SerializeField] private float                      _shootingInterval;
+    [SerializeField] private float                      _damageMultiplier;
+    [SerializeField] private GameObject                 _projectilePrefab; 
+    [SerializeField] private Sprite                     _sprite;
+    [SerializeField] private int                        _price;
+    [SerializeField] private string                     _description;
 
     private GunTrigger _gunTrigger;
     private SpriteRenderer _spriteRenderer;
 
-    //Публичные свойства для приватных полей
     public int Id
     {
         get { return _Id; }
@@ -84,7 +84,7 @@ public class GunInfo : MonoBehaviour, IHelicopterPart
         get { return this.gameObject; }
     }
 
-    //Получаем всю информацию о пушке из заранее прикреплённого ScriptableObject (Gun _gun)
+    //load information from scriptableobject to visualize it in editor
     public void SetGunInfoFromContainer()
     {
         Utils.SetObjectInfo(this, _gun);

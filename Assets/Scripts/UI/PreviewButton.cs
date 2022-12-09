@@ -20,10 +20,6 @@ public class PreviewButton : MonoBehaviour
         get { return this.transform.name; }
         set { this.transform.name = value; }
     }
-    public Image PreviewButtonImage
-    {
-        get { return _previewButtonImage; }
-    }
     public bool IsLocked
     {
         get { return _lock.activeSelf; }

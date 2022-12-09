@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Guns : MonoBehaviour, IShooter
 {
-    [SerializeField] private List<GameObject> _gunsGameObjectList; //—писок объектов всех пушек
+    [SerializeField] private List<GameObject> _gunsGameObjectList;
     [SerializeField] private List<GunInfo> _gunInfoList;
-    [SerializeField] private Buffs _buffs; //—сылка на экземпл€р класса обрабатывающего баффы полученные игроком во врем€ вылета
+    [SerializeField] private Buffs _buffs;
 
     private static Guns _instance;
 
@@ -28,7 +27,7 @@ public class Guns : MonoBehaviour, IShooter
     {
         TryToShootBullet(this);
     }
-    private void TryToShootBullet(Guns guns)    //ѕытаемс€ выстрелить, если успешно, то устанавливаем снар€ду модификатор скорости и силы, в зависимости от имеющихс€ бафов
+    private void TryToShootBullet(Guns guns)//Trying to shoot, if bullet was created then setting it all player modificators from Buffs class instance
     {
         for (int currentGunIndex = 0; currentGunIndex < _gunsGameObjectList.Count; currentGunIndex++)
         {

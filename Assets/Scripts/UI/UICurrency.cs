@@ -1,11 +1,12 @@
 using TMPro;
 using UnityEngine;
 
+//Currency value visualization
 public class UICurrency : MonoBehaviour
 {
     private TextMeshProUGUI _textLabel;
 
-    private void SetCurrencyToTextLabel() //»змен€ет текстовое значение валюты после изменени€ переменной
+    private void SetCurrencyToTextLabel()
     {
         _textLabel.text = Managers.Configuration.Currency.ToString();
     }
@@ -15,7 +16,7 @@ public class UICurrency : MonoBehaviour
         SetCurrencyToTextLabel();
     }
 
-    private void OnEnable() //ѕодпись на событие изменени€ количества валюты
+    private void OnEnable()
     {
         Managers.Configuration.OnCurrencyChanged += SetCurrencyToTextLabel;
     }
