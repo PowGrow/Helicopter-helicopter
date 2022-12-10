@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13454bb90f8f96c459754ad5e4e63e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletLifetime: 1
+  bulletLifetime: 1.5
   speed: 10
   damage: 10
 --- !u!61 &-2279608747414768122
@@ -120,7 +120,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.47368422, y: 1.2105263}
+    oldSize: {x: 0.36, y: 0.92}
     newSize: {x: 0.23333333, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

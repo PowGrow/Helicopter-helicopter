@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: enemy_part_2
   m_EditorClassIdentifier: 
   Id: 4
-  ShootingInterval: 0.5
+  ShootingInterval: 0.8
   DamageMultiplier: 1.5
   ProjectilePrefab: {fileID: 4642463222394750830, guid: bababa8bfd319414b8fe7f14c1292492, type: 3}
   Sprite: {fileID: 21300000, guid: 820144884b0de9c488a469cb3901ea96, type: 3}

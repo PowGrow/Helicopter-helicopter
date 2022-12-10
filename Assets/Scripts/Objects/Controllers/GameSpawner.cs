@@ -28,29 +28,30 @@ public class GameSpawner : MonoBehaviour
 
     private void RemoveEnemy(GameObject enemyGameObject)
     {
-        foreach(GameObject enemie in _enemies.ToList())
+        foreach(GameObject enemy in _enemies.ToList())
         {
-            if (enemie.GetInstanceID() == enemyGameObject.GetInstanceID())
-                _enemies.Remove(enemie);
+            if (enemy.GetInstanceID() == enemyGameObject.GetInstanceID())
+                _enemies.Remove(enemy);
         }
-        var health = enemyGameObject.GetComponent<EnemyHealth>();
-        health.OnEnemyDying -= RemoveEnemy;
-        if(_spawnedEnemyCount < _totalEnemyCount)
+        var enemyAnimator = enemyGameObject.GetComponentInChildren<EnemyAnimator>();
+        enemyAnimator.OnEnemyDestroyAnimationPlayed += RemoveEnemy;
+        if (_spawnedEnemyCount < _totalEnemyCount)
             StartCoroutine(SpawnOverTime(_spawnTimeDelay));
         if (_spawnedEnemyCount >= _totalEnemyCount && _enemies.Count() == 0)
             StartCoroutine(ReturnToBase());
 
     }
 
-    private List<float> GetSpawnPoints(float screenWidth, float enemyOnScreen)
+    private List<float> GetSpawnPoints(float horizontalBorder, float enemyOnScreen)
     {
+        var screenWidth = horizontalBorder * 2;
         var spawnPoints = new List<float>();
         var spawnPointOffset = (screenWidth / enemyOnScreen) / 2;
-        var spawnPoint = spawnPointOffset;
+        var currentSpawnPoint = -horizontalBorder + spawnPointOffset;
         for (int index = 0; index < enemyOnScreen; index++)
         {
-            spawnPoints.Add(spawnPoint);
-            spawnPoint += spawnPointOffset * 2;
+            spawnPoints.Add(currentSpawnPoint);
+            currentSpawnPoint += spawnPointOffset * 2;
         }
         return spawnPoints;
     }
@@ -60,8 +61,8 @@ public class GameSpawner : MonoBehaviour
         var rnd = Random.Range(0, _enemyTypeList.Count());
         var enemyType = _enemyTypeList[rnd];
         var enemy = Instantiate(enemyType, new Vector3(spawnPoint, _verticalBorder, 0), Quaternion.Euler(new Vector3(0,0,180)));
-        var health = enemy.gameObject.GetComponent<EnemyHealth>();
-        health.OnEnemyDying += RemoveEnemy;
+        var enemyAnimator = enemy.gameObject.GetComponentInChildren<EnemyAnimator>();
+        enemyAnimator.OnEnemyDestroyAnimationPlayed += RemoveEnemy;
         SetRandomEnemiPersonality(enemy);
         _enemies.Add(enemy);
         _spawnedEnemyCount++;

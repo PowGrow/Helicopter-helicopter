@@ -7,9 +7,10 @@ public class EnemyHealth : MonoBehaviour, IHealth
     [SerializeField] private float maxHealth = 100f;
     private float _currentHealth = 1f;
     private SpriteRenderer _spriteRenderer;
+    private Collider2D _collider;
 
     public Action<float> OnHealthCnaged;
-    public Action<GameObject> OnEnemyDying;
+    public Action OnEnemyDying;
     public float MaxHealth
     {
         get { return maxHealth; }
@@ -55,13 +56,14 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     private void Die()
     {
-        OnEnemyDying?.Invoke(this.gameObject);
-        Destroy(this.gameObject);
+        _collider.enabled = false;
+        OnEnemyDying?.Invoke();
     }
 
     private void Awake()
     {
         CurrentHealth = MaxHealth;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _collider = GetComponent<Collider2D>();
     }
 }

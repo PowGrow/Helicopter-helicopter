@@ -10,7 +10,7 @@ public class DefensiveBehavior : BaseBehavior
     public override void Move(Transform enemyTransform, Transform targetTransform)
     {
         TryToChangeDirection(enemyTransform);
-        enemyTransform.position = new Vector2(enemyTransform.position.x - Mathf.Sign(enemyTransform.position.x) * 0.1f, enemyTransform.position.y);
+        enemyTransform.position = new Vector2(enemyTransform.position.x - Mathf.Sign(enemyTransform.position.x) * 0.1f, enemyTransform.position.y);//Offset to push enemy from border
         enemyTransform.position = Vector2.MoveTowards(enemyTransform.position, new Vector2(_horizontalBorder, _verticalBorder), _direction * Time.deltaTime * _speed);
     }
 

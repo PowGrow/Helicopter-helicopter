@@ -3,10 +3,16 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected EnemyBehavior Behavior;
+    [SerializeField] private EnemyAnimator _animator;
     protected GameObject PlayerObject;
     protected IEnemyBehavior IEnemyBehavior;
     protected EnemyHealth Health;
+    private bool IsActive = false;
 
+    private void EnemyArrived(bool state)
+    {
+        IsActive = state;
+    }
     public void ChangeBehaviour(EnemyBehavior behavior)
     {
         switch (behavior)
@@ -22,6 +28,10 @@ public class EnemyBase : MonoBehaviour
                 break;
         }
     }
+    protected virtual void CheckCurrentBehavior(float value)
+    {
+        //Метод для переопределения, в базовом виде не делает ничего.
+    }
     private void Awake()
     {
         Health = GetComponent<EnemyHealth>();
@@ -30,27 +40,25 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Start()
     {
         PlayerObject = Managers.GameObjects.GetObject("Player");
+        
     }
 
     private void FixedUpdate()
     {
-        if(IEnemyBehavior != null)
+        if(IEnemyBehavior != null && IsActive)
             IEnemyBehavior.Move(this.transform, PlayerObject.transform);
-    }
-
-    protected virtual void CheckCurrentBehavior(float value)
-    {
-        //Метод для переопределения, в базовом виде не делает ничего.
     }
 
     private void OnEnable()
     {
         Health.OnHealthCnaged += CheckCurrentBehavior;
+        _animator.OnEnemyArrival += EnemyArrived;
     }
 
     private void OnDisable()
     {
         Health.OnHealthCnaged -= CheckCurrentBehavior;
+        _animator.OnEnemyArrival -= EnemyArrived;
     }
 
 }
