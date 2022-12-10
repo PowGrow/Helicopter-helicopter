@@ -13,6 +13,10 @@ public class EnemyBase : MonoBehaviour
     {
         IsActive = state;
     }
+    private SpriteRenderer HideEnemy()
+    {
+        return gameObject.GetComponent<SpriteRenderer>();
+    }
     public void ChangeBehaviour(EnemyBehavior behavior)
     {
         switch (behavior)
@@ -53,12 +57,13 @@ public class EnemyBase : MonoBehaviour
     {
         Health.OnHealthCnaged += CheckCurrentBehavior;
         _animator.OnEnemyArrival += EnemyArrived;
+        _animator.IsEnemyDestroyed += HideEnemy;
     }
 
     private void OnDisable()
     {
         Health.OnHealthCnaged -= CheckCurrentBehavior;
         _animator.OnEnemyArrival -= EnemyArrived;
+        _animator.IsEnemyDestroyed += HideEnemy;
     }
-
 }

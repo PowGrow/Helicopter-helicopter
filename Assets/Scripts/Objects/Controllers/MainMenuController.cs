@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private Button _continueButton;
     [SerializeField] private TextMeshProUGUI _saveGameLabel;
-
+    [SerializeField] private List<AudioClip> _audioClips;
     public Action OnGameSaved;
     public void OnNewGameButtonClick()
     {
@@ -19,7 +20,7 @@ public class MainMenuController : MonoBehaviour
 
     public void OnContinueButtonClick()
     {
-        if(Managers.Levels.SceneId() != 1)
+        if (Managers.Levels.SceneId() != 1)
             Utils.TimeScale();
         Managers.Data.LoadGameState();
         Managers.Levels.GoToNext();
@@ -51,9 +52,8 @@ public class MainMenuController : MonoBehaviour
     }
 
     private void Awake()
-    {
+    {  
         if(Managers.Levels.SceneId() == 1)
             CheckSave();   
     }
-
 }

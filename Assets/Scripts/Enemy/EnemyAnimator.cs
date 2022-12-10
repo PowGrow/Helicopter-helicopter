@@ -8,6 +8,7 @@ public class EnemyAnimator : MonoBehaviour
 
     public Action<GameObject> OnEnemyDestroyAnimationPlayed;
     public Action<bool> OnEnemyArrival;
+    public Func<SpriteRenderer> IsEnemyDestroyed;
 
     private void EnemyDie()
     {
@@ -23,6 +24,12 @@ public class EnemyAnimator : MonoBehaviour
     public void EnemyArrived()
     {
         OnEnemyArrival?.Invoke(true);
+    }
+
+    public void HideEnemySprite()
+    {
+        var spriteRenderer = IsEnemyDestroyed?.Invoke();
+        spriteRenderer.sprite = null;
     }
 
     private void Awake()
