@@ -34,7 +34,7 @@ public class EnemyBase : MonoBehaviour
     }
     protected virtual void CheckCurrentBehavior(float value)
     {
-        //Метод для переопределения, в базовом виде не делает ничего.
+        //Method for overriding, base do nothing...
     }
     private void Awake()
     {
