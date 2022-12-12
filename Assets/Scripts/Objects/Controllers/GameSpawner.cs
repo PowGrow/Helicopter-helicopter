@@ -92,9 +92,9 @@ public class GameSpawner : MonoBehaviour
             case 0:
                 var smartAss = enemy.GetComponent<EnemySmartAss>();
                 smartAss.enabled = true;
-                foreach (IEnemyBehavior enemyBehavior in _enemyBehaviorList)
+                for (int i=0;i<3;i++)
                 {
-                    var component = enemy.GetComponent(enemyBehavior.GetType()) as Behaviour;
+                    var component = enemy.GetComponent(_enemyBehaviorList[i].GetType()) as Behaviour;
                     component.enabled = true;
                 }
                 break;

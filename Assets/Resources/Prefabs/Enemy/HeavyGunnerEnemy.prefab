@@ -22,6 +22,9 @@ GameObject:
   - component: {fileID: 2129384289248999706}
   - component: {fileID: -3158697309297107876}
   - component: {fileID: -4210050361912192791}
+  - component: {fileID: -7594289805580664456}
+  - component: {fileID: 4075926001834768042}
+  - component: {fileID: -8783680678384544143}
   m_Layer: 9
   m_Name: HeavyGunnerEnemy
   m_TagString: Enemy
@@ -297,6 +300,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Behavior: 0
   _animator: {fileID: 5907356541244084088}
+--- !u!114 &-7594289805580664456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076837837885025295}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10cb479caf18ec43845ccd21ea76412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: 0.1
+  _speed: 6
+--- !u!114 &4075926001834768042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076837837885025295}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8bc46df5d550245b5ecea04e4f8a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: 0.1
+  _movementDirection: {x: 0, y: 0, z: 0}
+  _speed: 7
+--- !u!114 &-8783680678384544143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076837837885025295}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51955448b8cbb446a9fee372ab5bc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: 0.1
+  _speed: 6
+  _rotation: 0
+  y: 0
 --- !u!1 &1795594816732711299
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,15 @@ public class EnemyBase : MonoBehaviour
             case EnemyBehavior.careful:
                 IEnemyBehavior = GetComponent<CarefulBehavior>();
                 break;
+            case EnemyBehavior.following:
+                IEnemyBehavior = GetComponent<EnemyAxisFollowing>();
+                break;
+            case EnemyBehavior.axismoving:
+                IEnemyBehavior = GetComponent<EnemyAxisMoving>();
+                break;
+            case EnemyBehavior.followingcircle:
+                IEnemyBehavior = GetComponent<EnemyAxisFollowingCircle>();
+                break;
         }
     }
     protected virtual void CheckCurrentBehavior(float value)

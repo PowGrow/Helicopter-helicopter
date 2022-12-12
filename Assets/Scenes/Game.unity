@@ -512,6 +512,9 @@ GameObject:
   - component: {fileID: 407402586}
   - component: {fileID: 407402585}
   - component: {fileID: 407402584}
+  - component: {fileID: 407402589}
+  - component: {fileID: 407402587}
+  - component: {fileID: 407402590}
   m_Layer: 0
   m_Name: EnemyBehaviorList
   m_TagString: Untagged
@@ -580,6 +583,51 @@ MonoBehaviour:
   _offset: 0.1
   _speed: 6
   _chasingDistance: 1
+--- !u!114 &407402587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407402582}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8bc46df5d550245b5ecea04e4f8a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: 0.1
+  _movementDirection: {x: 0, y: 0, z: 0}
+  _speed: 7
+--- !u!114 &407402589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407402582}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d10cb479caf18ec43845ccd21ea76412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: 0.1
+  _speed: 6
+--- !u!114 &407402590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407402582}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51955448b8cbb446a9fee372ab5bc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: 0.1
+  _speed: 6
+  _rotation: 0
+  y: 0
 --- !u!1 &414393171
 GameObject:
   m_ObjectHideFlags: 0
